@@ -1,0 +1,86 @@
+.posterImage{
+    height: 600px;
+}
+
+.posterImage > img {
+    margin: auto;
+    display: block;
+    width: 100%;
+}
+
+.posterImage__overlay{
+    position: absolute;
+    padding: 5rem;
+    bottom: 0px;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    width: 100;
+    justify-content: flex-end;
+    align-items: flex-start;
+    background-image: linear-gradient(rgb(0,0,0,0), rgb(0,0,0,1));
+    opacity: 1;
+    transition: opacity .3s;
+}
+
+.posterImage__overlay:hover{
+    opacity: 1;
+}
+
+.posterImage__title{
+    font-weight: 900;
+    font-size: 4rem;
+    margin-bottom: 0.4rem;
+    text-align: left;
+    margin-left: 3rem;
+}
+
+.posterImage__runtimeGenres {
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+}
+
+.posterImage__runtimeGenres .posterImage__genres {
+    display: flex;
+    flex-direction: row; 
+    margin-left: 1rem;
+}
+
+.genreBox {
+    padding: .5rem;
+    border: 2px solid white;
+    border-radius: 20px;
+    margin-right: 1rem;
+}
+
+.posterImage__runtime{
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.posterImage__rating{
+    margin-left: 3rem;
+}
+
+.posterImage__rating,
+.posterImage__runtime {
+    margin-top: 0.5rem;
+}
+
+.posterImage__verticalLine {
+    margin: 0.75rem;
+    color: white;
+    font-size: 2rem;
+}
+
+.posterImage__description{
+    font-style: normal;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    display: flex;
+    text-align: justify;
+    width: 45%;
+    line-height: 1.5;
+    margin-left: 3rem;
+}

@@ -1,0 +1,14 @@
+.footer{
+    color: bisque;
+    background-color:darkslategrey;
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    margin: auto 0;
+}
+
+.footer-content{
+    text-align: center;
+}
