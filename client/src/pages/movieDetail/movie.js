@@ -85,7 +85,7 @@ const Movie = () => {
                     </div>
                     <div>
                         <button className="playTrailerButton">
-                            <FaPlayCircle /> Play Trailer
+                            <FaPlayCircle /> Watch Trailer
                         </button>
                     </div>
                     <div>

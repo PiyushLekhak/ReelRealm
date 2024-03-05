@@ -20,7 +20,7 @@
     box-sizing: border-box; /* Include padding and border in width calculation */
     display: flex; /* Add flex display */
     flex-direction: column; /* Arrange children in a column */
-    background-color: rgb(39, 39, 39);
+    background-color: #232323;
 }
 
 .reviews-list {

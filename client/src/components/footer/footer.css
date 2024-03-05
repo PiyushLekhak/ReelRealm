@@ -1,14 +1,106 @@
-.footer{
-    color: bisque;
-    background-color:darkslategrey;
-    position: fixed;
-    bottom: 0;
-    text-align: center;
+.footer-section {
+    display: flex;
     align-items: center;
-    width: 100%;
-    margin: auto 0;
+    justify-content: left;
+    color: #d9d2d2;
+    padding-left: 170px;
+    font-size: 25px;
+    font-weight: bold;
 }
 
-.footer-content{
-    text-align: center;
+.footer-content {
+    display: flex;
+    text-align: justify;
+    justify-content: left;
+    padding-left: 170px;
+    padding-right: 20px;
+    color: #bbb3b3;
+    font-size: 15px;
+    max-width: 70%;
+    line-height: 20px;
+}
+
+.footer-section2 {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    color: #d9d2d2;
+    padding-left: 70px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.footer-content2 {
+    display: flex;
+    text-align: left;
+    justify-content: left;
+    padding-left: 90px;
+    padding-right: 10px;
+    color: #bbb3b3;
+    font-size: 18px;
+    max-width: 70%;
+    line-height: 25px;
+}
+
+.footer-section3 {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    color: #d9d2d2;
+    padding-left: 200px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.footer-content3 {
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    justify-content: flex-start;
+    padding-left: 200px;
+    padding-right: 20px;
+    color: #bbb3b3;
+    font-size: 15px;
+    max-width: 50%;
+    line-height: 20px;
+} 
+
+.footer-links a {
+    text-decoration: none;
+    color: #838383;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+    color: #d2cfcf;
+}
+
+.footer-links2 {
+    display: flex;
+    flex-direction: row;
+    padding-top: 10px;
+}
+
+.footer-links2 a {
+    text-decoration: none;
+    color: #838383;
+    margin-right: 40px;
+    font-size: 24px;
+}
+
+.footer-links2 a:hover {
+    color: #d2cfcf;
+}
+
+.footer {
+    background-color: #232323;
+    color: rgb(95, 92, 92);
+    position: relative;
+}
+
+.footer-container {
+    display: grid;
+    background-color: #232323;
+    grid-template-rows: 1fr 2fr;
+    grid-template-columns: 1fr 0.3fr 1fr;
 }

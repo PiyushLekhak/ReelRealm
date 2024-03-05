@@ -11,7 +11,7 @@ import Register from './pages/register/register';
 import Watchlist from "./pages/watchlist/watchlist";
 import Profile from "./pages/profile/profile";
 import Recommendations from "./pages/recommendations/recommendations";
-// import Footer from "./components/footer/footer";
+import Footer from "./components/footer/footer";
 
 function App() {
   return (
@@ -34,7 +34,7 @@ function App() {
                 Sorry! This URL does not exist. Please recheck the entered URL.
               </h1>}></Route>
         </Routes>
-        {/* <Footer/> */}
+        <Footer/>
         </AuthProvider>
       </Router>
     </div>
