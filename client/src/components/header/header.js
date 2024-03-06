@@ -85,7 +85,7 @@ const Header = () => {
                 <Link to = "/movies/popular" style = {{textDecoration: "none"}}><span>Popular</span></Link>
                 <Link to = "/movies/top_rated"style = {{textDecoration: "none"}}><span>Top Rated</span></Link>
                 <Link to = "/movies/upcoming"style = {{textDecoration: "none"}}><span>Upcoming</span></Link>
-                <Link to="/watchlist"style = {{textDecoration: "none"}}><span><FaBookmark style={{marginRight: "5px"}}/>My Watchlist</span></Link>
+                <Link to="/watchlist"style = {{textDecoration: "none"}}><span><FaBookmark style={{marginRight: "5px"}}/>Watchlist</span></Link>
                 {token === null && 
                 <>
                 <Link to="/login"style = {{textDecoration: "none"}}><span>Log In</span></Link>

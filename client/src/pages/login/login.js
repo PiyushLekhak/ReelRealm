@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import AuthContext from '../../context/AuthContext';
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import AuthContext from "../../context/AuthContext";
+import { FaLock, FaUser, FaGoogle, FaFacebook } from "react-icons/fa";
 import "./login.css";
 
 function Login() {
   const { loginUser } = useContext(AuthContext);
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
@@ -18,42 +19,57 @@ function Login() {
   };
 
   return (
-    <div className="container">
-      <div className="card">
-        <div className="card-body">
+    <div>
+      <div className="signin-container">
+        <div className="signin-wrapper">
           <h1>Login</h1>
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="email">Email address:</label>
+            <div className="input-fields">
+              <FaUser className="icon" />
               <input
                 type="email"
-                className="form-control"
                 id="email"
                 name="email"
+                placeholder="Email"
+                className="login-inputs"
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="password">Password:</label>
+            <div className="input-fields">
+              <FaLock className="icon" />
               <input
                 type="password"
-                className="form-control"
                 id="password"
                 name="password"
+                placeholder="Password"
+                className="login-inputs"
               />
             </div>
-            <button type="submit" className="btn btn-dark btn-block">
-              Login
-            </button>
+            <div className="forgot-password-container">
+              <Link to="/forgot-password" className="forgot-password-link">
+                Forgot Password?
+              </Link>
+            </div>
+            <button className="login-button"> Login </button>
           </form>
-          <div className="text-center mt-3">
-            <p className="mb-1">
-              Forgot password? <a href="#!">Reset here</a>
-            </p>
-            <p>
-              Don't have an account?{' '}
-              <Link to="/register">Register Now</Link>
-            </p>
-          </div>
+          <br />
+          <p style={{ color: "white" }}>
+            Don't have an account?{" "}
+            <Link to="/register" className="register-link">
+              Register Now
+            </Link>
+          </p>
+          <br/>
+          <h2>OR</h2>
+          <br />
+          <button className="media-btn">
+            {" "}
+            <FaGoogle className="social-media-icon" /> Sign in with Google{" "}
+          </button>
+          <br />
+          <button className="media-btn">
+            {" "}
+            <FaFacebook className="social-media-icon" /> Sign in with Facebook{" "}
+          </button>
         </div>
       </div>
     </div>

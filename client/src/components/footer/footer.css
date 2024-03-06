@@ -1,3 +1,16 @@
+.footer {
+    background-color: #181818;
+    color: rgb(95, 92, 92);
+    position: relative;
+}
+
+.footer-container {
+    display: grid;
+    background-color: #181818;
+    grid-template-rows: 1fr 2fr;
+    grid-template-columns: 1fr 0.3fr 1fr;
+}
+
 .footer-section {
     display: flex;
     align-items: center;
@@ -90,17 +103,4 @@
 
 .footer-links2 a:hover {
     color: #d2cfcf;
-}
-
-.footer {
-    background-color: #232323;
-    color: rgb(95, 92, 92);
-    position: relative;
-}
-
-.footer-container {
-    display: grid;
-    background-color: #232323;
-    grid-template-rows: 1fr 2fr;
-    grid-template-columns: 1fr 0.3fr 1fr;
 }
