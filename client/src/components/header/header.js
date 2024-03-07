@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
-import { FaBookmark, FaLock, FaSearch, FaUser } from 'react-icons/fa';
+import { FaBookmark, FaSearch, FaUser } from 'react-icons/fa';
 import { useState, useRef, useEffect } from "react";
 
 const Header = () => {

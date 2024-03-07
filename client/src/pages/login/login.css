@@ -5,6 +5,7 @@
   padding: 100px;
   flex-direction: column;
   min-height: 80vh;
+  margin-top: -40px;
 }
 
 .signin-wrapper {
@@ -105,4 +106,10 @@
 .login-button:hover,
 .media-btn:hover {
   background-color: rgb(226, 117, 90);
+}
+
+.logo {
+  width: 150px; /* Adjust the width as needed */
+  margin-bottom: 20px; /* Add margin-bottom for spacing */
+  transform: scale(1.75);
 }

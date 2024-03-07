@@ -22,6 +22,7 @@ function Login() {
     <div>
       <div className="signin-container">
         <div className="signin-wrapper">
+        <img src="/images/Logo.png" alt="Logo" className="logo" />
           <h1>Login</h1>
           <form onSubmit={handleSubmit}>
             <div className="input-fields">

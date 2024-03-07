@@ -12,15 +12,20 @@
 }
 
 .review {
-    width: calc(50% - 10px); /* Set width to 50% with margin */
+    width: calc(50% - 10px);
     margin-bottom: 20px;
-    border: 1px solid  rgb(198, 87, 62);
+    border: 1px solid  rgb(63, 62, 61);
     border-radius: 5px;
     padding: 10px;
-    box-sizing: border-box; /* Include padding and border in width calculation */
-    display: flex; /* Add flex display */
-    flex-direction: column; /* Arrange children in a column */
-    background-color: #382418;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    background-color: #333232;
+    transition: transform 0.3s ease; /* Add transition property */
+}
+
+.review:hover {
+    transform: scale(1.05); /* Scale up slightly on hover */
 }
 
 .reviews-list {
