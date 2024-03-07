@@ -11,14 +11,12 @@ export default function Footer() {
         <div className="footer-section3">Contact Us</div>
         <div className="footer-content">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-            faucibus arcu a justo aliquam, eu sodales odio placerat. Donec
-            consequat purus ut lorem cursus, nec blandit lorem consequat. Nunc
-            fringilla enim ac lorem bibendum, vitae cursus mauris lacinia.
-            Pellentesque habitant morbi tristique senectus et netus et malesuada
-            fames ac turpis egestas. Donec fermentum nunc et libero dictum, in
-            congue ligula condimentum. Integer non pharetra est. Nam vitae
-            aliquam dui.
+            Welcome to ReelRealm, where cinematic wonders come to life! Dive
+            into a world of enchanting narratives, captivating performances, and
+            immersive storytelling. From in-depth movie reviews to
+            behind-the-scenes insights, we unlock the magic of cinema for
+            cinephiles and entertainment enthusiasts alike. Explore, discover,
+            and experience the reel magic at ReelRealm!
           </p>
         </div>
         <div className="footer-content2">
@@ -30,28 +28,45 @@ export default function Footer() {
               <a href="/watchlist">My Watchlist</a>
             </li>
             <li>
-              <a href="#">Terms of Service</a>
+              <a href="/*">Terms of Service</a>
             </li>
             <li>
-              <a href="#">Privacy Policy</a>
+              <a href="/*">Privacy Policy</a>
             </li>
           </ul>
         </div>
         <div className="footer-content3">
+          <ul>
+            For inquiries, collaborations, or just to say hello, reach out to us
+            on our social platforms. Let's connect and celebrate the love for
+            movies!
+          </ul>
+          <ul class="footer-links2">
             <ul>
-              Contact us for any queries about the recommendations. We can also
-              provide assistance based on user preferences. We are the best.
+              <a href="https://twitter.com/" target="blank">
+                <FaTwitter />
+              </a>
             </ul>
-            <ul class="footer-links2">
-              <ul><a href="#"><FaTwitter /></a></ul>
-              <ul><a href="#"><FaFacebook /></a></ul>
-              <ul><a href="#"><FaInstagram /></a></ul>
-              <ul><a href="#"><FaGithub /></a></ul>
+            <ul>
+              <a href="https://www.facebook.com/" target="blank">
+                <FaFacebook />
+              </a>
             </ul>
+            <ul>
+              <a href="https://www.instagram.com/" target="blank">
+                <FaInstagram />
+              </a>
+            </ul>
+            <ul>
+              <a href="https://github.com/" target="blank">
+                <FaGithub />
+              </a>
+            </ul>
+          </ul>
         </div>
       </div>
-      <br/>
-      <div style={{textAlign: 'center'}}>&copy; ReelRealm</div>
+      <br />
+      <div style={{ textAlign: "center" }}>&copy; ReelRealm</div>
     </div>
   );
 }
