@@ -4,19 +4,21 @@ import { useParams } from "react-router-dom";
 import { FaPlayCircle } from "react-icons/fa";
 import { IoMdAddCircle } from "react-icons/io";
 import { FaStarHalfAlt } from "react-icons/fa";
+import Youtube from 'react-youtube'
 import ReviewsSection from "../../components/reviewsSection/reviewsSection";
 
 const Movie = () => {
     const [currentMovieDetail, setMovie] = useState();
     const [streamingPlatforms, setStreamingPlatforms] = useState([]);
     const [topCast, setTopCast] = useState([]);
+    const [isTrailerPlaying, setIsTrailerPlaying] = useState(false);
+    const [trailerKey, setTrailerKey] = useState(null);
     const { id } = useParams();
-    const key = id;
 
     useEffect(() => {
         getData();
         window.scrollTo(0, 0);
-    }, [key]);
+    }, [id]);
 
     const getData = () => {
         fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=05b81b536fc24a416036ac3e5d797fd2`)
@@ -35,6 +37,18 @@ const Movie = () => {
                 }
             })
             .catch(error => console.error("Error fetching streaming platforms:", error));
+            
+        fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=05b81b536fc24a416036ac3e5d797fd2`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.results && data.results.length > 0) {
+                    const trailer = data.results.find(video => video.type === "Trailer");
+                    if (trailer) {
+                        setTrailerKey(trailer.key);
+                    }
+                }
+            })
+            .catch(error => console.error("Error fetching trailer:", error));
 
         fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=05b81b536fc24a416036ac3e5d797fd2`)
             .then(res => res.json())
@@ -44,6 +58,14 @@ const Movie = () => {
                 }
             })
             .catch(error => console.error("Error fetching top cast:", error));
+    };
+
+    const playTrailer = () => {
+        setIsTrailerPlaying(true);
+    };
+
+    const closeTrailer = () => {
+        setIsTrailerPlaying(false);
     };
 
     return (
@@ -84,9 +106,35 @@ const Movie = () => {
                         </div>
                     </div>
                     <div>
-                        <button className="playTrailerButton">
-                            <FaPlayCircle /> Watch Trailer
-                        </button>
+                        {isTrailerPlaying ? (
+                            <div>
+                                <Youtube
+                                    videoId={trailerKey}
+                                    className={"youtube-container"}
+                                    opts={
+                                        {
+                                            width: '100%',
+                                            height: '100%',
+                                            playerVars: {
+                                                autoplay: 1,
+                                                controls: 1,
+                                                cc_load_policy: 0,
+                                                fs: 0,
+                                                iv_load_policy: 0,
+                                                modestbranding: 0,
+                                                rel: 0,
+                                                showinfo: 0,
+                                            },
+                                        }
+                                    }
+                                />
+                                <button onClick={closeTrailer} className={"trailerClose-button close-video"}>Close</button>
+                            </div>
+                        ) : (
+                            <button className="playTrailerButton" onClick={playTrailer}>
+                                <FaPlayCircle /> Play Trailer
+                            </button>
+                        )}
                     </div>
                     <div>
                         <button className="addToWatchlistButton">
