@@ -41,18 +41,18 @@ a > span {
     margin: 0 30px;
     font-size: 1.3rem;
     cursor: pointer;
-    color: white;
+    color: #fa5437;
 }
 
 a > span{
     margin: 0 30px;
     font-size: 1.3rem;
     cursor: pointer;
-    color: white;
+    color: #fa5437;
 }
 
 a > span:hover {
-    color: rgb(252, 74, 30);
+    color: #f4eba3;
 }
 
 .header__icon {
@@ -90,7 +90,7 @@ a > span:hover {
 }
 
 .searchResultItem:hover {
-    background-color: #fc6e1b;
+    background-color: #b6593c;
 }
 
 .searchResultItem + .searchResultItem {
