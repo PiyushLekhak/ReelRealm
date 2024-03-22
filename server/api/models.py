@@ -13,9 +13,6 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
-    # def profile(self):
-    #     profile = Profile.objects.get(user=self)
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=100)
@@ -26,6 +23,12 @@ class Profile(models.Model):
     def __str__(self):
         return self.full_name
 
+class Watchlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    movie_id = models.IntegerField()
+
+    def __str__(self):
+        return f"Watchlist Entry for {self.user.username}"
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:

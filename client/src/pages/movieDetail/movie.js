@@ -6,6 +6,10 @@ import { IoMdAddCircle } from "react-icons/io";
 import { FaStarHalfAlt } from "react-icons/fa";
 import Youtube from 'react-youtube'
 import ReviewsSection from "../../components/reviewsSection/reviewsSection";
+import { jwtDecode } from "jwt-decode";
+import { useContext } from "react";
+import AuthContext from "../../context/AuthContext";
+const swal = require('sweetalert2');
 
 const Movie = () => {
     const [currentMovieDetail, setMovie] = useState();
@@ -14,6 +18,7 @@ const Movie = () => {
     const [isTrailerPlaying, setIsTrailerPlaying] = useState(false);
     const [trailerKey, setTrailerKey] = useState(null);
     const { id } = useParams();
+    const { user, authTokens } = useContext(AuthContext);
 
     useEffect(() => {
         getData();
@@ -66,6 +71,59 @@ const Movie = () => {
 
     const closeTrailer = () => {
         setIsTrailerPlaying(false);
+    };
+
+    const addToWatchlist = async () => {
+        const decodedToken = jwtDecode(authTokens.access);
+        const userId = decodedToken.user_id;
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/add_to_watchlist/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${authTokens.access}`,
+                },
+                body: JSON.stringify({
+                    user_id: userId,
+                    movie_id: id,
+                }),
+            });
+
+            if (response.ok) {
+                swal.fire({
+                    title: "Movie Added to Watchlist",
+                    icon: "success",
+                    toast: true,
+                    timer: 2500,
+                    position: "top-right",
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                });
+            } else {
+                console.error("Failed to add movie to watchlist:", response.statusText);
+                swal.fire({
+                    title: "Failed to add movie to watchlist",
+                    icon: "error",
+                    toast: true,
+                    timer: 2500,
+                    position: "top-right",
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                });
+            }
+        } catch (error) {
+            console.error("Error adding movie to watchlist:", error);
+            swal.fire({
+                title: "An Error Occurred",
+                text: "Failed to add movie to watchlist",
+                icon: "error",
+                toast: true,
+                timer: 2500,
+                position: "top-right",
+                timerProgressBar: true,
+                showConfirmButton: false,
+            });
+        }
     };
 
     return (
@@ -137,7 +195,7 @@ const Movie = () => {
                         )}
                     </div>
                     <div>
-                        <button className="addToWatchlistButton">
+                        <button className="addToWatchlistButton" onClick={addToWatchlist}>
                             <IoMdAddCircle /> Add to Watchlist
                         </button>
                     </div><div>
