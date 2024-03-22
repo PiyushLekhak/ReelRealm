@@ -74,21 +74,21 @@ const Movie = () => {
     };
 
     const addToWatchlist = async () => {
-        const decodedToken = jwtDecode(authTokens.access);
-        const userId = decodedToken.user_id;
+        const decodedToken = authTokens ? jwtDecode(authTokens.access) : null;
+        const userId = decodedToken ? decodedToken.user_id : null;
         try {
             const response = await fetch("http://127.0.0.1:8000/api/add_to_watchlist/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${authTokens.access}`,
+                    Authorization: `Bearer ${authTokens?.access}`,
                 },
                 body: JSON.stringify({
                     user_id: userId,
                     movie_id: id,
                 }),
             });
-
+    
             if (response.ok) {
                 swal.fire({
                     title: "Movie Added to Watchlist",
@@ -99,10 +99,37 @@ const Movie = () => {
                     timerProgressBar: true,
                     showConfirmButton: false,
                 });
-            } else {
-                console.error("Failed to add movie to watchlist:", response.statusText);
+            } else if (response.status === 401) {
                 swal.fire({
-                    title: "Failed to add movie to watchlist",
+                    title: "Login Required",
+                    text: "You need to log in to add movies to your watchlist.",
+                    icon: "warning",
+                    toast: true,
+                    timer: 2500,
+                    position: "top-right",
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                });
+            } else {
+                throw await response.json();
+            }
+        } catch (error) {
+            console.error("Error adding movie to watchlist:", error);
+            if (error.error === "Movie is already in the watchlist") {
+                swal.fire({
+                    title: "Movie Already in Watchlist",
+                    text: "The movie you're trying to add is already in your watchlist.",
+                    icon: "info",
+                    toast: true,
+                    timer: 2500,
+                    position: "top-right",
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                });
+            } else {
+                swal.fire({
+                    title: "An Error Occurred",
+                    text: "Failed to add movie to watchlist",
                     icon: "error",
                     toast: true,
                     timer: 2500,
@@ -111,20 +138,9 @@ const Movie = () => {
                     showConfirmButton: false,
                 });
             }
-        } catch (error) {
-            console.error("Error adding movie to watchlist:", error);
-            swal.fire({
-                title: "An Error Occurred",
-                text: "Failed to add movie to watchlist",
-                icon: "error",
-                toast: true,
-                timer: 2500,
-                position: "top-right",
-                timerProgressBar: true,
-                showConfirmButton: false,
-            });
         }
     };
+        
 
     return (
         <div className="movie">
