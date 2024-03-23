@@ -44,13 +44,6 @@ a > span {
     color: #fa5437;
 }
 
-a > span{
-    margin: 0 30px;
-    font-size: 1.3rem;
-    cursor: pointer;
-    color: #fa5437;
-}
-
 a > span:hover {
     color: #f4eba3;
 }
@@ -136,4 +129,37 @@ a > span:hover {
     font-weight: bold;
     margin-top: 20px;
     font-size: 15px; /* Adjust font size */
+}
+
+/* Style the user icon */
+.userIcon {
+    cursor: pointer;
+    font-size: larger;
+}
+
+.userDropdown {
+    position: relative;
+}
+
+.dropdownMenu {
+    position: absolute;
+    top: calc(100% + 20px); /* Adjust the distance from the user icon */
+    right: 0;
+    width: 250px; /* Adjust the width */
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.dropdownMenu a > span {
+    display: block;
+    padding: 10px;
+    color: #fa5437;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.dropdownMenu a > span:hover {
+    color: #f4eba3;
 }

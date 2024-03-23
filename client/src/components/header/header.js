@@ -21,20 +21,26 @@ const Header = () => {
     const [searchResults, setSearchResults] = useState([]);
     const navigate = useNavigate();
     const searchBoxRef = useRef(null);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const handleDropdown = () => {
+        setDropdownOpen(!dropdownOpen);
+    };
+
+    const handleOutsideClick = (event) => {
+        if ((dropdownOpen && !event.target.closest('.userDropdown')) ||
+            (searchResults.length > 0 && !event.target.closest('.searchBox'))) {
+            setDropdownOpen(false);
+            setSearchResults([]);
+        }
+    };
 
     useEffect(() => {
-        const handleOutsideClick = (event) => {
-            if (searchBoxRef.current && !searchBoxRef.current.contains(event.target)) {
-                setSearchResults([]);
-            }
-        };
-
         document.addEventListener("click", handleOutsideClick);
-
         return () => {
             document.removeEventListener("click", handleOutsideClick);
         };
-    }, []);
+    }, [dropdownOpen, searchResults]);
 
     const handleSearch = (event) => {
         const query = event.target.value;
@@ -55,6 +61,7 @@ const Header = () => {
         navigate(`/movie/${movieId}`);
         setSearchResults([]);
     };
+
     return(
         <div className = "header">
             <div className = "headerleft">
@@ -91,13 +98,23 @@ const Header = () => {
                 <Link to="/login"style = {{textDecoration: "none"}}><span>Log In</span></Link>
                 </>}
                 {token !== null && 
-                <>
-                <Link to="/recommendations" style={{ textDecoration: "none" }}><span>Recommendations</span></Link>
-                <Link to="/rated-movies" style={{ textDecoration: "none" }}><span>Rated Movies</span></Link>
-                <Link onClick={logoutUser} style = {{textDecoration: "none"}}><span>Log Out</span></Link>
-                </>}
-            </div>
+                    <>
+                        <div className="userDropdown" onClick={handleDropdown}>
+                            <FaUser className="userIcon" />
+                            {dropdownOpen && (
+                                <div className="dropdownMenu">
+                                    <Link to="/recommendations" style={{textDecoration: "none"}}><span>Recommendations</span></Link>
+                                    <Link to="/rated-movies" style={{textDecoration: "none"}}><span>Rated Movies</span></Link>
+                                    <Link to="/profile" style={{textDecoration: "none"}}><span>My Profile</span></Link>
+                                    <Link onClick={logoutUser} style={{textDecoration: "none"}}><span>Log Out</span></Link>
+                                </div>
+                            )
+                        }
+                    </div>
+                </>
+            }
         </div>
+    </div>
     )
 }
 
