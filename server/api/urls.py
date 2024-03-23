@@ -12,6 +12,7 @@ urlpatterns = [
     path('add_to_watchlist/', views.add_to_watchlist, name='add_to_watchlist'),
     path('remove_from_watchlist/<int:movie_id>/', views.remove_from_watchlist, name='remove_from_watchlist'),
     path('get_watchlist/', views.get_watchlist, name='get_watchlist'),
+    path('check_watchlist/<int:movie_id>/', views.check_watchlist, name='check_watchlist'),
     path('test/', views.testEndPoint, name='test'),
     path('', views.getRoutes),
 ]

@@ -78,17 +78,16 @@ const Movie = () => {
 
     const checkWatchlist = async () => {
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/get_watchlist/`, {
+            const response = await fetch(`http://127.0.0.1:8000/api/check_watchlist/${id}/`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${authTokens.access}`,
                 },
             });
-
+    
             if (response.ok) {
                 const data = await response.json();
-                const movieIds = data.map(item => item.movie_id);
-                setIsInWatchlist(movieIds.includes(id)); // Update isInWatchlist based on whether movieId is in the watchlist
+                setIsInWatchlist(data.is_in_watchlist);
             } else {
                 throw new Error("Failed to fetch watchlist");
             }
@@ -98,102 +97,82 @@ const Movie = () => {
     };
 
     const toggleWatchlist = async () => {
-    try {
-        const decodedToken = authTokens ? jwtDecode(authTokens.access) : null;
-        const userId = decodedToken ? decodedToken.user_id : null;
-        
-        if (isInWatchlist) {
-            // If movie is already in watchlist, remove it
-            const response = await fetch(`http://127.0.0.1:8000/api/remove_from_watchlist/${id}/`, {
-                method: "DELETE",
-                headers: {
-                    Authorization: `Bearer ${authTokens?.access}`,
-                },
-            });
-
-            if (response.ok) {
-                setIsInWatchlist(false);
+        try {
+            const decodedToken = authTokens ? jwtDecode(authTokens.access) : null;
+            const userId = decodedToken ? decodedToken.user_id : null;
+    
+            if (!decodedToken) {
+                // User is not logged in, show a message prompting them to login
                 swal.fire({
-                    title: "Movie Removed from Watchlist",
-                    icon: "success",
+                    title: "Please Login",
+                    text: "You need to login to perform this action.",
+                    icon: "warning",
                     toast: true,
                     timer: 2500,
                     position: "top-right",
                     timerProgressBar: true,
                     showConfirmButton: false,
                 });
-            } else {
-                throw await response.json();
+                return;
             }
-        } else {
-            // If movie is not in watchlist, add it
-            const response = await fetch("http://127.0.0.1:8000/api/add_to_watchlist/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${authTokens?.access}`,
-                },
-                body: JSON.stringify({
-                    user_id: userId,
-                    movie_id: id,
-                }),
-            });
-
-            if (response.ok) {
-                setIsInWatchlist(true);
-                swal.fire({
-                    title: "Movie Added to Watchlist",
-                    icon: "success",
-                    toast: true,
-                    timer: 2500,
-                    position: "top-right",
-                    timerProgressBar: true,
-                    showConfirmButton: false,
+    
+            if (isInWatchlist) {
+                // If movie is already in watchlist, remove it
+                const response = await fetch(`http://127.0.0.1:8000/api/remove_from_watchlist/${id}/`, {
+                    method: "DELETE",
+                    headers: {
+                        Authorization: `Bearer ${authTokens?.access}`,
+                    },
                 });
+    
+                if (response.ok) {
+                    setIsInWatchlist(false);
+                    swal.fire({
+                        title: "Movie Removed from Watchlist",
+                        icon: "success",
+                        toast: true,
+                        timer: 2500,
+                        position: "top-right",
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                    });
+                } else {
+                    throw new Error("Failed to remove movie from watchlist.");
+                }
             } else {
-                throw await response.json();
+                // If movie is not in watchlist, add it
+                const response = await fetch("http://127.0.0.1:8000/api/add_to_watchlist/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${authTokens?.access}`,
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        movie_id: id,
+                    }),
+                });
+    
+                if (response.ok) {
+                    setIsInWatchlist(true);
+                    swal.fire({
+                        title: "Movie Added to Watchlist",
+                        icon: "success",
+                        toast: true,
+                        timer: 2500,
+                        position: "top-right",
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                    });
+                }
+                else {
+                    throw new Error("Failed to add movie to watchlist.");
+                }
             }
+        } catch (error) {
+            console.error(error);
         }
-    } catch (error) {
-        console.error("Error toggling watchlist:", error);
-        if (error.error === "Watchlist entry not found") {
-            swal.fire({
-                title: "Movie Not in Watchlist",
-                text: "The movie you're trying to remove is not in your watchlist.",
-                icon: "info",
-                toast: true,
-                timer: 2500,
-                position: "top-right",
-                timerProgressBar: true,
-                showConfirmButton: false,
-            });
-        } else if (error.error === "Movie is already in the watchlist") {
-            swal.fire({
-                title: "Movie Already in Watchlist",
-                text: "The movie you're trying to add is already in your watchlist.",
-                icon: "info",
-                toast: true,
-                timer: 2500,
-                position: "top-right",
-                timerProgressBar: true,
-                showConfirmButton: false,
-            });
-        } else {
-            swal.fire({
-                title: "An Error Occurred",
-                text: "Failed to toggle watchlist",
-                icon: "error",
-                toast: true,
-                timer: 2500,
-                position: "top-right",
-                timerProgressBar: true,
-                showConfirmButton: false,
-            });
-        }
-    }
-};
-
-        
+    };
 
     return (
         <div className="movie">

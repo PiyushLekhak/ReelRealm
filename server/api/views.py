@@ -88,3 +88,15 @@ def testEndPoint(request):
         data = f'Congratulation your API just responded to POST request with text: {text}'
         return Response({'response': data}, status=status.HTTP_200_OK)
     return Response({}, status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def check_watchlist(request, movie_id):
+    try:
+        # Check if the movie is in the user's watchlist
+        is_in_watchlist = Watchlist.objects.filter(user=request.user, movie_id=movie_id).exists()
+        
+        return Response({'is_in_watchlist': is_in_watchlist}, status=status.HTTP_200_OK)
+    
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
