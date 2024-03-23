@@ -92,6 +92,8 @@ const Header = () => {
                 </>}
                 {token !== null && 
                 <>
+                <Link to="/recommendations" style={{ textDecoration: "none" }}><span>Recommendations</span></Link>
+                <Link to="/rated-movies" style={{ textDecoration: "none" }}><span>Rated Movies</span></Link>
                 <Link onClick={logoutUser} style = {{textDecoration: "none"}}><span>Log Out</span></Link>
                 </>}
             </div>

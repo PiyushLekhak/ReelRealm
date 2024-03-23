@@ -9,8 +9,9 @@ import Movie from './pages/movieDetail/movie';
 import Login from './pages/login/login';
 import Register from './pages/register/register';
 import Watchlist from "./pages/watchlist/watchlist";
-import Profile from "./pages/profile/profile";
 import Recommendations from "./pages/recommendations/recommendations";
+import RatedMovies from "./pages/ratedMovies/ratedMovies";
+import Profile from "./pages/profile/profile";
 import Footer from "./components/footer/footer";
 
 function App() {
@@ -26,9 +27,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route element={<PrivateRoute/>}>
-              <Route path='/watchlist' element={<Watchlist/>} />
-              <Route path='/profile' element={<Profile/>} />
+              <Route path='/watchlist' element={<Watchlist/>} />              
               <Route path='/recommendations' element={<Recommendations/>} />
+              <Route path='/rated-movies' element={<RatedMovies/>} />
+              <Route path='/profile' element={<Profile/>} />
           </Route>
           <Route path="/*" element={<h1 style={{ textAlign: "center", marginTop: "20rem", color: "rgb(252, 74, 30)" }}>
                 Sorry! This URL does not exist. Please recheck the entered URL.

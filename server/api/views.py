@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from api.models import User,Watchlist
+from api.models import User,Watchlist,Rating
 
-from api.serializer import MyTokenObtainPairSerializer, RegisterSerializer, WatchlistSerializer
+from api.serializer import MyTokenObtainPairSerializer, RegisterSerializer, WatchlistSerializer, RatingSerializer
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -66,29 +66,6 @@ def get_watchlist(request):
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
-@api_view(['GET'])
-def getRoutes(request):
-    routes = [
-        '/api/token/',
-        '/api/register/',
-        '/api/token/refresh/'
-    ]
-    return Response(routes)
-
-
-@api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
-def testEndPoint(request):
-    if request.method == 'GET':
-        data = f"Congratulation {request.user}, your API just responded to GET request"
-        return Response({'response': data}, status=status.HTTP_200_OK)
-    elif request.method == 'POST':
-        text = "Hello buddy"
-        data = f'Congratulation your API just responded to POST request with text: {text}'
-        return Response({'response': data}, status=status.HTTP_200_OK)
-    return Response({}, status.HTTP_400_BAD_REQUEST)
-
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def check_watchlist(request, movie_id):
@@ -98,5 +75,70 @@ def check_watchlist(request, movie_id):
         
         return Response({'is_in_watchlist': is_in_watchlist}, status=status.HTTP_200_OK)
     
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def rate_movie(request):
+    try:
+        user = request.user
+        movie_id = request.data.get('movie_id')
+        rating_value = request.data.get('rating')
+        
+        # Check if movie_id and rating are provided
+        if not movie_id or not rating_value:
+            return Response({'error': 'Movie ID and rating are required'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Validate rating value (assuming rating is between 1 to 10)
+        if not 1 <= rating_value <= 10:
+            return Response({'error': 'Rating value must be between 1 and 10'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Check if the user has already rated the movie
+        existing_rating = Rating.objects.filter(user=user, movie_id=movie_id).first()
+        if existing_rating:
+            # Update existing rating
+            existing_rating.rating = rating_value
+            existing_rating.save()
+            return Response({'message': 'Rating updated successfully'}, status=status.HTTP_200_OK)
+        
+        # Save the new rating
+        rating = Rating.objects.create(user=user, movie_id=movie_id, rating=rating_value)
+        
+        return Response({'message': 'Rating submitted successfully'}, status=status.HTTP_201_CREATED)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_rating(request, movie_id):
+    try:
+        user = request.user
+        
+        # Retrieve the rating for the movie by the user
+        rating = Rating.objects.get(user=user, movie_id=movie_id)
+        
+        # Serialize the rating data
+        serializer = RatingSerializer(rating)
+        
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Rating.DoesNotExist:
+        return Response({'error': 'Rating not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_rating(request, movie_id):
+    try:
+        user = request.user
+        
+        # Retrieve and delete the rating for the movie by the user
+        rating = Rating.objects.get(user=user, movie_id=movie_id)
+        rating.delete()
+        
+        return Response({'message': 'Rating deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+    except Rating.DoesNotExist:
+        return Response({'error': 'Rating not found'}, status=status.HTTP_404_NOT_FOUND)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

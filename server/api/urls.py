@@ -13,6 +13,7 @@ urlpatterns = [
     path('remove_from_watchlist/<int:movie_id>/', views.remove_from_watchlist, name='remove_from_watchlist'),
     path('get_watchlist/', views.get_watchlist, name='get_watchlist'),
     path('check_watchlist/<int:movie_id>/', views.check_watchlist, name='check_watchlist'),
-    path('test/', views.testEndPoint, name='test'),
-    path('', views.getRoutes),
+    path('rate_movie/', views.rate_movie, name='rate_movie'),
+    path('get_rating/<int:movie_id>/', views.get_rating, name='get_rating'),
+    path('delete_rating/<int:movie_id>/', views.delete_rating, name='delete_rating'),
 ]

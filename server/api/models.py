@@ -29,6 +29,17 @@ class Watchlist(models.Model):
 
     def __str__(self):
         return f"Watchlist Entry for {self.user.username}"
+    
+class Rating(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    movie_id = models.IntegerField()
+    rating = models.IntegerField()
+
+    class Meta:
+        unique_together = ('user', 'movie_id')  # Each user can rate a movie only once
+
+    def __str__(self):
+        return f"Rating {self.rating} by {self.user.username} for {self.movie.title}"
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
