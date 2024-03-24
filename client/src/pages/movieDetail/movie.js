@@ -29,6 +29,7 @@ const Movie = () => {
     useEffect(() => {
         getData();
         checkWatchlist();
+        fetchUserRating();
         window.scrollTo(0, 0);
     }, [id]);
 
@@ -171,6 +172,24 @@ const Movie = () => {
             }
         } catch (error) {
             console.error("Error fetching watchlist:", error);
+        }
+    };
+
+    const fetchUserRating = async () => {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/api/get_rating/${id}/`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${authTokens.access}`,
+                },
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setRating(data.rating); // Update state with fetched rating
+            }
+        } catch (error) {
+            console.error("Error fetching user rating:", error);
         }
     };
 
