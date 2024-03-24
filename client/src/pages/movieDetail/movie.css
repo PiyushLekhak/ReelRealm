@@ -294,3 +294,92 @@
     bottom: 10px;
     left: 10px;
 }
+
+input[type="radio"] {
+    display: none;
+}
+
+body.active-modal {
+    overflow-y: hidden;
+}
+
+.btn-modal {
+    padding: 10px 20px;
+    display: block;
+    margin: 100px auto 0;
+    font-size: 18px;
+}
+
+.modal,
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    z-index: 10000;
+}
+
+.overlay {
+    background: rgba(49, 49, 49, 0.8);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: #303030;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 800px;
+    height: auto;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.rating-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.star {
+    cursor: pointer;
+}
+
+.close-modal,
+.submit-modal {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.close-modal {
+    background-color: #fa5437;
+    color: black;
+}
+
+.submit-modal {
+    background-color: #4CAF50;
+    color: black;
+}
+
+.close-modal:hover,
+.submit-modal:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #f4eba3;
+}

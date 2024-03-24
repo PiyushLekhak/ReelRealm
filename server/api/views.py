@@ -101,11 +101,21 @@ def rate_movie(request):
             existing_rating.rating = rating_value
             existing_rating.save()
             return Response({'message': 'Rating updated successfully'}, status=status.HTTP_200_OK)
-        
-        # Save the new rating
-        rating = Rating.objects.create(user=user, movie_id=movie_id, rating=rating_value)
-        
-        return Response({'message': 'Rating submitted successfully'}, status=status.HTTP_201_CREATED)
+        else:
+            # Create new rating
+            rating = Rating.objects.create(user=user, movie_id=movie_id, rating=rating_value)
+            return Response({'message': 'Rating submitted successfully'}, status=status.HTTP_201_CREATED)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_user_rated_movies(request):
+    try:
+        # Retrieving movies rated by the user
+        rated_movies = Rating.objects.filter(user=request.user)
+        serializer = RatingSerializer(rated_movies, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     

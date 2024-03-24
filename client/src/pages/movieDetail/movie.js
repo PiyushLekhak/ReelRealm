@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./movie.css";
 import { useParams } from "react-router-dom";
-import { FaPlayCircle } from "react-icons/fa";
+import { FaPlayCircle, FaStarHalfAlt, FaStar } from "react-icons/fa";
 import { IoMdAddCircle } from "react-icons/io";
 import { GrSubtractCircle } from "react-icons/gr";
-import { FaStarHalfAlt } from "react-icons/fa";
-import Youtube from 'react-youtube'
+import Youtube from 'react-youtube';
 import ReviewsSection from "../../components/reviewsSection/reviewsSection";
 import { jwtDecode } from "jwt-decode";
 import { useContext } from "react";
@@ -19,6 +18,11 @@ const Movie = () => {
     const [isTrailerPlaying, setIsTrailerPlaying] = useState(false);
     const [trailerKey, setTrailerKey] = useState(null);
     const [isInWatchlist, setIsInWatchlist] = useState(false);
+    const [modal, setModal] = useState(false);
+    const [rating, setRating] = useState(null);
+    const [hover, setHover] = useState(null);
+    const modalRef = useRef(null);
+
     const { id } = useParams();
     const { user, authTokens } = useContext(AuthContext);
 
@@ -74,6 +78,80 @@ const Movie = () => {
 
     const closeTrailer = () => {
         setIsTrailerPlaying(false);
+    };
+
+    const toggleModal = () => {
+        // Check if the user is logged in before opening the modal
+        if (!authTokens) {
+            // User is not logged in, show a message prompting them to login
+            swal.fire({
+                title: "Please Login",
+                text: "You need to login to rate this movie.",
+                icon: "warning",
+                toast: true,
+                timer: 2500,
+                position: "top-right",
+                timerProgressBar: true,
+                showConfirmButton: false,
+            });
+        } else {
+            // User is logged in, open the rating modal
+            setModal(!modal);
+        }
+    };
+    
+    const rateMovie = async () => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/rate_movie/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${authTokens?.access}`,
+                },
+                body: JSON.stringify({
+                    movie_id: id,
+                    rating: rating,
+                }),
+            });
+    
+            if (response.ok) {
+                // Rating submitted successfully
+                swal.fire({
+                    title: "Rating submitted successfully",
+                    icon: "success",
+                    toast: true,
+                    timer: 2500,
+                    position: "top-right",
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                });
+                toggleModal(); // Close the modal after submitting the rating
+            } else {
+                throw new Error("Failed to submit rating.");
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const handleOutsideClick = (event) => {
+        if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setModal(false);
+        }
+    };
+    
+    useEffect(() => {
+        document.addEventListener("click", handleOutsideClick);
+        return () => {
+        document.removeEventListener("click", handleOutsideClick);
+        };
+    }, []);
+    
+    const handleButtonClick = (event) => {
+        // Prevent event propagation to the document level
+        event.stopPropagation();
+        // Toggle the modal
+        toggleModal();
     };
 
     const checkWatchlist = async () => {
@@ -164,8 +242,7 @@ const Movie = () => {
                         timerProgressBar: true,
                         showConfirmButton: false,
                     });
-                }
-                else {
+                } else {
                     throw new Error("Failed to add movie to watchlist.");
                 }
             }
@@ -242,14 +319,14 @@ const Movie = () => {
                             </button>
                         )}
                     </div>
-                    <div>{/* Conditional rendering of button based on isInWatchlist state */}
-                <button className="addToWatchlistButton" onClick={toggleWatchlist}>
-                    {isInWatchlist ? <GrSubtractCircle /> : <IoMdAddCircle />} {/* Render appropriate icon */}
-                    {isInWatchlist ? "Remove from Watchlist" : "Add to Watchlist"} {/* Render appropriate text */}
-                </button>
+                    <div>
+                        <button className="addToWatchlistButton" onClick={toggleWatchlist}>
+                            {isInWatchlist ? <GrSubtractCircle /> : <IoMdAddCircle />} {/* Render appropriate icon */}
+                            {isInWatchlist ? "Remove from Watchlist" : "Add to Watchlist"} {/* Render appropriate text */}
+                        </button>
                     </div>
                     <div>
-                        <button className="rateButton">
+                        <button className="rateButton" onClick={handleButtonClick}>
                             <FaStarHalfAlt style={{ color: "gold" }} /> Rate Movie
                         </button>
                     </div>
@@ -275,6 +352,48 @@ const Movie = () => {
                                 <div className="castName">{cast.name}</div>
                             </div>
                         ))}
+                    </div>
+                </div>
+            )}
+            {modal && (
+                <div className="modal">
+                    <div className="overlay"></div>
+                    <div ref={modalRef} className="modal-content">
+                    <h2 style={{ marginBottom: "25px" }}>Rate this movie out of 10</h2>
+                        <div className="rating-container">
+                            {[...Array(10)].map((star, index) => {
+                                const currentRating = index + 1;
+                                return (
+                                    <label key={index}>
+                                        <input
+                                            type="radio"
+                                            name="rating"
+                                            value={currentRating}
+                                            onClick={() => setRating(currentRating)}
+                                        />
+                                        <FaStar
+                                            className="star"
+                                            size={50}
+                                            color={
+                                                currentRating <= (hover || rating)
+                                                ? "#ffc107"
+                                                : "#e4e5e9"
+                                            }
+                                            onMouseEnter={() => setHover(currentRating)}
+                                            onMouseLeave={() => setHover(null)}
+                                        />
+                                    </label>
+                                );
+                            })}
+                        </div>
+                        <div className="button-container">
+                            <button className="close-modal" onClick={toggleModal}>
+                                CANCEL
+                            </button>
+                            <button className="submit-modal" onClick={rateMovie}>
+                                SUBMIT
+                            </button>                            
+                        </div>
                     </div>
                 </div>
             )}
