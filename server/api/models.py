@@ -40,6 +40,14 @@ class Rating(models.Model):
 
     def __str__(self):
         return f"Rating {self.rating} by {self.user.username} for {self.movie.title}"
+    
+class Movie(models.Model):
+    movie_id = models.IntegerField(unique=True)
+    movie_title = models.CharField(max_length=255)
+    movie_features = models.TextField()
+
+    def __str__(self):
+        return self.movie_title
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
