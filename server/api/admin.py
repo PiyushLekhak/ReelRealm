@@ -1,5 +1,5 @@
 from django.contrib import admin
-from api.models import User, Profile, Watchlist, Rating, Movie
+from api.models import User, Profile, Watchlist, Rating, Movie, UserInterest
 from import_export.admin import ImportExportModelAdmin
 
 class UserAdmin(admin.ModelAdmin):
@@ -18,8 +18,13 @@ class RatingAdmin(admin.ModelAdmin):
 class MovieAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['movie_id', 'movie_title', 'movie_features']
 
+class UserInterestAdmin(admin.ModelAdmin):
+    list_display = ['user', 'interest']
+
+
 admin.site.register(User, UserAdmin)
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Watchlist, WatchlistAdmin)
 admin.site.register(Rating, RatingAdmin)
 admin.site.register(Movie, MovieAdmin)
+admin.site.register(UserInterest, UserInterestAdmin)

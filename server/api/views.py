@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from api.models import User,Watchlist,Rating
+from api.models import User,Watchlist,Rating,UserInterest
 
-from api.serializer import MyTokenObtainPairSerializer, RegisterSerializer, WatchlistSerializer, RatingSerializer
+from api.serializer import MyTokenObtainPairSerializer, RegisterSerializer, WatchlistSerializer, RatingSerializer, UserInterestSerializer
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -150,5 +150,55 @@ def delete_rating(request, movie_id):
         return Response({'message': 'Rating deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
     except Rating.DoesNotExist:
         return Response({'error': 'Rating not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def save_user_interest(request):
+    try:
+        user = request.user
+        genre = request.data.get('genre')  # Assuming genre is sent in the request data
+        overview = request.data.get('overview')  # Assuming overview is sent in the request data
+
+        # Combine genre and overview into a single string
+        interest = f"{genre} {overview}"
+
+        # Save user interest to the database
+        serializer = UserInterestSerializer(data={'user': user.id, 'interest': interest})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_user_interest(request):
+    try:
+        user = request.user
+        
+        # Retrieve user's interests
+        interests = UserInterest.objects.filter(user=user)
+        serializer = UserInterestSerializer(interests, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_user_interest(request, interest_id):
+    try:
+        user = request.user
+        
+        # Retrieve and delete user's interest
+        interest = UserInterest.objects.get(user=user, id=interest_id)
+        interest.delete()
+        
+        return Response({'message': 'User interest deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+    except UserInterest.DoesNotExist:
+        return Response({'error': 'User interest not found'}, status=status.HTTP_404_NOT_FOUND)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

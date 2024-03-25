@@ -11,11 +11,11 @@ const RatedMovies = () => {
 
     useEffect(() => {
         if (authTokens) {
-            fetchWatchlist();
+            fetchRatings();
         }
     }, [authTokens]);
 
-    const fetchWatchlist = async () => {
+    const fetchRatings = async () => {
         try {
             const response = await fetch("http://127.0.0.1:8000/api/get_user_rated_movies/", {
                 method: "GET",
@@ -35,7 +35,7 @@ const RatedMovies = () => {
         }
     };
 
-    const removeFromWatchlist = async (movieId) => {
+    const removeFromRatings = async (movieId) => {
         try {
             const response = await fetch(`http://127.0.0.1:8000/api/delete_rating/${movieId}/`, {
                 method: "DELETE",
@@ -65,7 +65,7 @@ const RatedMovies = () => {
                     <div key={item.movie_id} className="card-wrapper">
                         <ICards movieId={item.movie_id} />
                         <div>
-                            <button className="remove-button" onClick={() => removeFromWatchlist(item.movie_id)}><GrSubtractCircle style={{ color: "#fa5437" }}/></button>
+                            <button className="remove-button" onClick={() => removeFromRatings(item.movie_id)}><GrSubtractCircle style={{ color: "#fa5437" }}/></button>
                         </div>
                     </div>
                 ))}

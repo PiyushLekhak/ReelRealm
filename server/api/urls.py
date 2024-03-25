@@ -17,4 +17,7 @@ urlpatterns = [
     path('get_user_rated_movies/', views.get_user_rated_movies, name='get_user_rated_movies'),
     path('get_rating/<int:movie_id>/', views.get_rating, name='get_rating'),
     path('delete_rating/<int:movie_id>/', views.delete_rating, name='delete_rating'),
+    path('save_user_interest/', views.save_user_interest, name='save_user_interest'),
+    path('get_user_interest/', views.get_user_interest, name='get_user_interest'),
+    path('delete_user_interest/', views.delete_user_interest, name='delete_user_interest'),
 ]

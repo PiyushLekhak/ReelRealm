@@ -101,6 +101,28 @@ const Movie = () => {
         }
     };
     
+    const saveUserInterest = async (genre, overview) => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/save_user_interest/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${authTokens?.access}`,
+                },
+                body: JSON.stringify({
+                    genre: genre,
+                    overview: overview,
+                }),
+            });
+    
+            if (!response.ok) {
+                throw new Error("Failed to save user interest.");
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     const rateMovie = async () => {
         try {
             const response = await fetch("http://127.0.0.1:8000/api/rate_movie/", {
@@ -126,7 +148,15 @@ const Movie = () => {
                     timerProgressBar: true,
                     showConfirmButton: false,
                 });
-                toggleModal(); // Close the modal after submitting the rating
+    
+                // Extract genre and overview from currentMovieDetail
+                const genre = currentMovieDetail && currentMovieDetail.genres ? currentMovieDetail.genres.map(genre => genre.name).join(', ') : '';
+                const overview = currentMovieDetail ? currentMovieDetail.overview : '';
+    
+                // Call saveUserInterest with appropriate genre and overview values
+                await saveUserInterest(genre, overview);
+    
+                toggleModal(); // Close the modal after submitting the rating and user interest
             } else {
                 throw new Error("Failed to submit rating.");
             }
