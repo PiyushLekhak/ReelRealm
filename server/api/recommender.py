@@ -59,7 +59,6 @@ content_based_recommender = create_content_based_recommender()
 @receiver(post_save, sender=UserInterest)
 def generate_recommendations(sender, instance, created, **kwargs):
     if created:
-        print("Signal triggered")
         # Fetch all interests of the current user
         user_interests = UserInterest.objects.filter(user=instance.user)
         
@@ -79,11 +78,11 @@ def generate_recommendations(sender, instance, created, **kwargs):
         for title in recommendations:
             movie = Movie.objects.filter(movie_title=title).first()
             if movie:
-                recommended_movies.append(movie)
+                recommended_movies.append(movie.movie_id)
 
         # Delete existing recommendations for the user
         Recommendation.objects.filter(user=instance.user).delete()
 
         # Save the latest recommendations in the Recommendation table
         for movie in recommended_movies:
-            Recommendation.objects.create(user=instance.user, movie=movie)
+            Recommendation.objects.create(user=instance.user, movie_id=movie)

@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from api.models import User,Watchlist,Rating,UserInterest
+from api.models import User,Watchlist,Rating,UserInterest,Recommendation
 
-from api.serializer import MyTokenObtainPairSerializer, RegisterSerializer, WatchlistSerializer, RatingSerializer, UserInterestSerializer
+from api.serializer import MyTokenObtainPairSerializer, RegisterSerializer, WatchlistSerializer, RatingSerializer, UserInterestSerializer,RecommendationSerializer
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -199,5 +199,16 @@ def delete_user_interest(request, interest_id):
         return Response({'message': 'User interest deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
     except UserInterest.DoesNotExist:
         return Response({'error': 'User interest not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_recommendations(request):
+    try:
+        # Retrieving user's recommendations
+        recommendations = Recommendation.objects.filter(user=request.user)
+        serializer = RecommendationSerializer(recommendations, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

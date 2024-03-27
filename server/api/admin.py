@@ -22,7 +22,7 @@ class UserInterestAdmin(admin.ModelAdmin):
     list_display = ['user', 'interest']
 
 class RecommendationAdmin(admin.ModelAdmin):
-    list_display = ['user', 'movie']
+    list_display = ['user', 'movie_id']
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Profile, ProfileAdmin)

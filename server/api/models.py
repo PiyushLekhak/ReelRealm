@@ -54,13 +54,13 @@ class UserInterest(models.Model):
 
     def __str__(self):
         return f"Interest of {self.user.username}"
-
+    
 class Recommendation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    movie_id = models.IntegerField()
 
     def __str__(self):
-        return f"{self.user.username}'s Recommendation for {self.movie.movie_title}"
+        return f"Recommendation for {self.user.username}"
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
