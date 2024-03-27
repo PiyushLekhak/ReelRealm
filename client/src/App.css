@@ -3,3 +3,14 @@
     color: white;
     font-family: sans-serif;
 }
+
+.wrong-url-message {
+    text-align: center;
+    color: #fa5437;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 15.75rem);
+    font-weight: bold;
+    font-size: 2rem;
+}

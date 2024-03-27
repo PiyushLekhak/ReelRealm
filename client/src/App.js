@@ -32,9 +32,9 @@ function App() {
               <Route path='/rated-movies' element={<RatedMovies/>} />
               <Route path='/profile' element={<Profile/>} />
           </Route>
-          <Route path="/*" element={<h1 style={{ textAlign: "center", marginTop: "20rem", color: "rgb(252, 74, 30)" }}>
+          <Route path="/*" element={<p className="wrong-url-message">
                 Sorry! This URL does not exist. Please recheck the entered URL.
-              </h1>}></Route>
+              </p>}></Route>
         </Routes>
         <Footer/>
         </AuthProvider>

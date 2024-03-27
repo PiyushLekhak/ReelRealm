@@ -99,11 +99,11 @@ const Header = () => {
                 </>}
                 {token !== null && 
                     <>
+                    <Link to="/recommendations" style={{textDecoration: "none"}}><span>Recommendations</span></Link>
                         <div className="userDropdown" onClick={handleDropdown}>
                             <FaUser className="userIcon" />
                             {dropdownOpen && (
-                                <div className="dropdownMenu">
-                                    <Link to="/recommendations" style={{textDecoration: "none"}}><span>Recommendations</span></Link>
+                                <div className="dropdownMenu">                                    
                                     <Link to="/rated-movies" style={{textDecoration: "none"}}><span>Rated Movies</span></Link>
                                     <Link to="/profile" style={{textDecoration: "none"}}><span>My Profile</span></Link>
                                     <Link onClick={logoutUser} style={{textDecoration: "none"}}><span>Log Out</span></Link>

@@ -59,17 +59,21 @@ const RatedMovies = () => {
     return (
         <div className="movie__list">
             <h2 className="list__title" style={{ color: "#f4eba3" }}> My Rated Movies</h2>
-            <div className="list__cards">
-                {/* Map over the rated movies and render Cards component for each movie */}
-                {ratedMovies.map(item => (
-                    <div key={item.movie_id} className="card-wrapper">
-                        <ICards movieId={item.movie_id} />
-                        <div>
-                            <button className="remove-button" onClick={() => removeFromRatings(item.movie_id)}><GrSubtractCircle style={{ color: "#fa5437" }}/></button>
+            {ratedMovies.length === 0 ? (
+                <p className="empty-message">It looks like you have not rated any movies yet.</p>
+            ) : (
+                <div className="list__cards">
+                    {/* Map over the rated movies and render Cards component for each movie */}
+                    {ratedMovies.map(item => (
+                        <div key={item.movie_id} className="card-wrapper">
+                            <ICards movieId={item.movie_id} />
+                            <div>
+                                <button className="remove-button" onClick={() => removeFromRatings(item.movie_id)}><GrSubtractCircle style={{ color: "#fa5437" }}/></button>
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

@@ -59,17 +59,21 @@ const Watchlist = () => {
     return (
         <div className="movie__list">
             <h2 className="list__title" style={{ color: "#f4eba3" }}> My Watchlist</h2>
-            <div className="list__cards">
-                {/* Map over the watchlist and render Cards component for each movie */}
-                {watchlist.map(item => (
-                    <div key={item.movie_id} className="card-wrapper">
-                        <ICards movieId={item.movie_id} />
-                        <div>
-                            <button className="remove-button" onClick={() => removeFromWatchlist(item.movie_id)}><GrSubtractCircle style={{ color: "#fa5437" }}/></button>
+            {watchlist.length === 0 ? (
+                <p className="empty-message" >It looks like you have not added any movies to your watchlist.</p>
+            ) : (
+                <div className="list__cards">
+                    {/* Map over the watchlist and render Cards component for each movie */}
+                    {watchlist.map(item => (
+                        <div key={item.movie_id} className="card-wrapper">
+                            <ICards movieId={item.movie_id} />
+                            <div>
+                                <button className="remove-button" onClick={() => removeFromWatchlist(item.movie_id)}><GrSubtractCircle style={{ color: "#fa5437" }}/></button>
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
