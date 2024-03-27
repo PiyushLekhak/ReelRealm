@@ -157,20 +157,19 @@ def delete_rating(request, movie_id):
 @permission_classes([IsAuthenticated])
 def save_user_interest(request):
     try:
-        user = request.user
-        genre = request.data.get('genre')  # Assuming genre is sent in the request data
-        overview = request.data.get('overview')  # Assuming overview is sent in the request data
+        # Extract data from the request
+        genre = request.data.get('genre')
+        overview = request.data.get('overview')
 
         # Combine genre and overview into a single string
         interest = f"{genre} {overview}"
 
-        # Save user interest to the database
-        serializer = UserInterestSerializer(data={'user': user.id, 'interest': interest})
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        # Validate and save user interest
+        serializer = UserInterestSerializer(data={'user': request.user.id, 'interest': interest})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 

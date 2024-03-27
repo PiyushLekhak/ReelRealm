@@ -2,7 +2,6 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import AbstractUser
 
-
 class User(AbstractUser):
     username = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
@@ -39,7 +38,7 @@ class Rating(models.Model):
         unique_together = ('user', 'movie_id')  # Each user can rate a movie only once
 
     def __str__(self):
-        return f"Rating {self.rating} by {self.user.username} for {self.movie.title}"
+        return f"Rating {self.rating} by {self.user.username} for {self.movie.movie_title}"
     
 class Movie(models.Model):
     movie_id = models.IntegerField(unique=True)
@@ -55,6 +54,13 @@ class UserInterest(models.Model):
 
     def __str__(self):
         return f"Interest of {self.user.username}"
+
+class Recommendation(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user.username}'s Recommendation for {self.movie.movie_title}"
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:

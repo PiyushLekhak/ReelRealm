@@ -1,4 +1,4 @@
-from api.models import User,Watchlist,Rating,UserInterest
+from api.models import User,Watchlist,Rating,UserInterest,Recommendation,Movie
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
@@ -60,7 +60,17 @@ class RatingSerializer(serializers.ModelSerializer):
         model = Rating
         fields = ['user', 'movie_id', 'rating']
 
+class MovieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = ['movie_id', 'movie_title', 'movie_features']
+
 class UserInterestSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserInterest
         fields = ['user', 'interest']
+
+class RecommendationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Recommendation
+        fields = ['user', 'movie']

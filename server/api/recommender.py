@@ -2,7 +2,10 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 from nltk.stem.porter import PorterStemmer
-from .models import Movie  # Import your Movie model
+from .models import Movie, UserInterest, Recommendation
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+import re
 
 # Function to apply stemming to text
 def stem_text(text):
@@ -24,9 +27,6 @@ def create_content_based_recommender():
     # Transforming the combined info of all movies into a numerical matrix using CountVectorizer
     vector = cv.fit_transform(all_features).toarray()
 
-    # Calculating cosine similarity between items based on the transformed numerical matrix
-    content_based_similarity = cosine_similarity(vector)
-
     # Modified content-based recommender function
     def content_based_recommender(words):
         # Combine the input words into a single string
@@ -46,8 +46,44 @@ def create_content_based_recommender():
 
         # Display the titles of the top 10 most similar movies
         similar_movies = []
-        for index in sorted_indices[1:11]:  # Exclude the first index (self-similarity)
-            similar_movies.append(all_movies[index].title)
+        for index in sorted_indices[1:21]:  # Exclude the first index (self-similarity)
+            similar_movies.append(all_movies[int(index)].movie_title)
         return similar_movies
 
     return content_based_recommender
+
+# Define the content-based recommender function
+content_based_recommender = create_content_based_recommender()
+
+# Signal handler to generate recommendations when a new UserInterest is created
+@receiver(post_save, sender=UserInterest)
+def generate_recommendations(sender, instance, created, **kwargs):
+    if created:
+        print("Signal triggered")
+        # Fetch all interests of the current user
+        user_interests = UserInterest.objects.filter(user=instance.user)
+        
+        # Combine all user interests into a single list of words
+        all_user_interests = []
+        for interest in user_interests:
+            interests_text = interest.interest.lower()
+            interests_text = re.sub(r'[^a-z\s]', '', interests_text)
+            interests_text = re.sub(r'\s+', ' ', interests_text)
+            all_user_interests.extend(interests_text.split())
+
+        # Generate recommendations based on all user interests
+        recommendations = content_based_recommender(all_user_interests)
+
+        # Map each recommended movie title to its corresponding Movie object
+        recommended_movies = []
+        for title in recommendations:
+            movie = Movie.objects.filter(movie_title=title).first()
+            if movie:
+                recommended_movies.append(movie)
+
+        # Delete existing recommendations for the user
+        Recommendation.objects.filter(user=instance.user).delete()
+
+        # Save the latest recommendations in the Recommendation table
+        for movie in recommended_movies:
+            Recommendation.objects.create(user=instance.user, movie=movie)
