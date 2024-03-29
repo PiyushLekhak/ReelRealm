@@ -12,6 +12,7 @@ import Watchlist from "./pages/watchlist/watchlist";
 import Recommendations from "./pages/recommendations/recommendations";
 import RatedMovies from "./pages/ratedMovies/ratedMovies";
 import Profile from "./pages/profile/profile";
+import ForgotPassword from "./pages/forgotPassword/forgotPassword";
 import Footer from "./components/footer/footer";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="movies/:type" element={<MovieList/>}/>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route element={<PrivateRoute/>}>
               <Route path='/watchlist' element={<Watchlist/>} />              
               <Route path='/recommendations' element={<Recommendations/>} />
