@@ -38,7 +38,7 @@ class Rating(models.Model):
         unique_together = ('user', 'movie_id')  # Each user can rate a movie only once
 
     def __str__(self):
-        return f"Rating {self.rating} by {self.user.username} for {self.movie.movie_title}"
+        return f"Rating {self.rating} by {self.user.username} for {self.movie_id}"
     
 class Movie(models.Model):
     movie_id = models.IntegerField(unique=True)

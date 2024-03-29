@@ -18,6 +18,10 @@ function Login() {
     console.log(password);
   };
 
+  const handleForgotPassword = () => {
+    window.location.href = "http://127.0.0.1:8000/reset_password/";
+  };
+
   return (
     <div>
       <div className="signin-container">
@@ -46,9 +50,9 @@ function Login() {
               />
             </div>
             <div className="forgot-password-container">
-              <Link to="/forgot-password" className="forgot-password-link">
+              <button onClick={handleForgotPassword} className="forgot-password-link">
                 Forgot Password?
-              </Link>
+              </button>
             </div>
             <button className="login-button"> Login </button>
           </form>
@@ -66,11 +70,11 @@ function Login() {
             {" "}
             <FaGoogle className="social-media-icon" /> Sign in with Google{" "}
           </button>
-          <br />
+          {/* <br />
           <button className="media-btn">
             {" "}
             <FaFacebook className="social-media-icon" /> Sign in with Facebook{" "}
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

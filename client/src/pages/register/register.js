@@ -18,8 +18,8 @@ function Register() {
   };
 
   return (
-    <div className="signin-container">
-      <div className="signin-wrapper">
+    <div className="register-container">
+      <div className="register-wrapper">
         <img src="/images/Logo.png" alt="Logo" className="logo" />
         <h1>Register</h1>
         <form onSubmit={handleSubmit}>

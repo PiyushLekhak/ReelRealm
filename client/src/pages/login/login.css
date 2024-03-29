@@ -95,12 +95,15 @@
   color: white;
   font-size: smaller;
   margin-left: 325px;
+  background-color: black;
+  border: none;
 }
 
 .register-link:hover,
 .forgot-password-link:hover {
   color: rgb(252, 74, 30);
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .login-button:hover,

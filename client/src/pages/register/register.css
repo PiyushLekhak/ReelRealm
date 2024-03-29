@@ -1,4 +1,4 @@
-.signin-container {
+.register-container {
   background-color: black;
   align-items: center;
   display: flex;
@@ -8,7 +8,7 @@
   margin-top: -40px;
 }
 
-.signin-wrapper {
+.register-wrapper {
   background-color: rgba(5, 5, 5, 0.5);
   width: 30vw;
   justify-content: center;
