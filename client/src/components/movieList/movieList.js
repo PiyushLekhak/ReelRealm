@@ -23,9 +23,9 @@ const MovieList = () => {
     }
 
     return (
-        <div className="movie__list">
-            <h2 className="list__title">{(type ? type : "Recently Released").toUpperCase()}</h2>
-            <div className="list__cards">
+        <div className="movie-list">
+            <h2 className="list-title">{(type ? type : "Recently Released").toUpperCase()}</h2>
+            <div className="list-cards">
                 {
                     movieList.map(movie => (
                         <Cards movie={movie} />

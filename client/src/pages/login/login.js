@@ -64,7 +64,7 @@ function Login() {
             </Link>
           </p>
           <br/>
-          <h2>OR</h2>
+          <h3>OR</h3>
           <br />
           <button className="media-btn">
             {" "}

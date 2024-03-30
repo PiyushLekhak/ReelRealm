@@ -1,6 +1,6 @@
 .header {
     margin: 0 2.5rem;
-    padding: .5rem 0;
+    padding: .45rem .9rem .1rem .9rem;
     align-items: center;
     display: flex;
     justify-content: space-between;
@@ -21,13 +21,13 @@
 }
 
 .searchBox input {
-    padding: 10px 20px;
+    padding: 7.5px 7.5px;
     border-radius: 20px;
     border: 1px solid #636363;
     outline: none;
     background-color: rgba(255, 255, 255, 0.1);
     color: rgb(238, 237, 237);
-    width: 400px;
+    width: 335px;
     font-size: 16px;
     padding-left: 50px;
 }
@@ -39,7 +39,7 @@
 
 a > span {
     margin: 0 30px;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     cursor: pointer;
     color: #fa5437;
 }
@@ -49,7 +49,7 @@ a > span:hover {
 }
 
 .header__icon {
-    width: 80px;
+    width: 90px;
     cursor: pointer;
     transform: scale(1.75);
 }
@@ -68,7 +68,7 @@ a > span:hover {
     background-color: rgb(55, 55, 55);
     border: 10px #404040;
     border-top: none;
-    margin-left: 320px;
+    margin-left: 245px;
     border-radius: 0 0 5px 5px;
     z-index: 999;
 }
@@ -76,23 +76,34 @@ a > span:hover {
 .searchResultItem {
     padding: 10px;
     cursor: pointer;
-    font-weight: bold; /* Make the text bold */
     color: #f7ded1; /* Set text color */
     display: flex;
     align-items: center;
 }
 
+.searchResultItem .movieName {
+    font-size: 17px;
+    font-weight: bold;
+    color: #f7ded1;
+}
+
+.searchResultItem .releaseYear {
+    font-size: 14px;
+    font-weight: normal;
+    color: #f7ded1;
+}
+
 .searchResultItem:hover {
-    background-color: #b6593c;
+    background-color: #5e534c;
 }
 
 .searchResultItem + .searchResultItem {
-    border-top: 1px solid #6f6e6e; /* Add a border above each item */
+    border-top: 1px solid #4b4848; /* Add a border above each item */
 }
 
 /* Change scrollbar color */
 .searchResults::-webkit-scrollbar {
-    width: 8px; /* Width of the scrollbar */
+    width: 9px; /* Width of the scrollbar */
 }
 
 .searchResults::-webkit-scrollbar-thumb {
@@ -143,9 +154,9 @@ a > span:hover {
 
 .dropdownMenu {
     position: absolute;
-    top: calc(100% + 20px); /* Adjust the distance from the user icon */
+    top: calc(100% + 15px); /* Adjust the distance from the user icon */
     right: 0;
-    width: 250px; /* Adjust the width */
+    width: 200px; /* Adjust the width */
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -154,10 +165,11 @@ a > span:hover {
 
 .dropdownMenu a > span {
     display: block;
-    padding: 10px;
+    padding: 8px;
     color: #fa5437;
     text-decoration: none;
     transition: background-color 0.3s;
+    font-size: 1.1rem;
 }
 
 .dropdownMenu a > span:hover {

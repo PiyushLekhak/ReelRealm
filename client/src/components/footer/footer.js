@@ -25,7 +25,7 @@ export default function Footer() {
               <a href="/">Home</a>
             </li>
             <li>
-              <a href="/watchlist">My Watchlist</a>
+              <a href="/watchlist">Watchlist</a>
             </li>
             <li>
               <a href="/*">Terms of Service</a>
@@ -66,7 +66,7 @@ export default function Footer() {
         </div>
       </div>
       <br />
-      <div style={{ textAlign: "center" }}>&copy; ReelRealm</div>
+      <div style={{ textAlign: "center" }}>&copy; ReelRealm 2024</div>
     </div>
   );
 }

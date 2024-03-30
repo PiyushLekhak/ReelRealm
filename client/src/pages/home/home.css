@@ -29,10 +29,10 @@
 
 .posterImage__title{
     font-weight: 900;
-    font-size: 4rem;
-    margin-bottom: 0.4rem;
+    font-size: 2.5rem;
+    margin-bottom: 0.3rem;
     text-align: left;
-    margin-left: 3rem;
+    margin-left: 1.75rem;
 }
 
 .posterImage__runtimeGenres {
@@ -44,23 +44,24 @@
 .posterImage__runtimeGenres .posterImage__genres {
     display: flex;
     flex-direction: row; 
-    margin-left: 1rem;
+    margin-left: .75rem;
 }
 
 .genreBox {
-    padding: .5rem;
-    border: 2px solid white;
+    padding: .45rem;
+    border: 1.75px solid white;
     border-radius: 20px;
     margin-right: 1rem;
+    margin-left: -0.5rem;
 }
 
 .posterImage__runtime{
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-bottom: 1rem;
 }
 
 .posterImage__rating{
-    margin-left: 3rem;
+    margin-left: 1.75rem;
 }
 
 .posterImage__rating,
@@ -69,18 +70,18 @@
 }
 
 .posterImage__verticalLine {
-    margin: 0.75rem;
+    margin: 0.45rem;
     color: white;
-    font-size: 2rem;
+    font-size: 1.75rem;
 }
 
 .posterImage__description{
     font-style: normal;
-    font-size: 1rem;
+    font-size: 0.9rem;
     margin-bottom: 0.25rem;
     display: flex;
     text-align: justify;
     width: 45%;
     line-height: 1.5;
-    margin-left: 3rem;
+    margin-left: 1.75rem;
 }

@@ -7,8 +7,8 @@
 .footer-container {
     display: grid;
     background-color: #181818;
-    grid-template-rows: 1fr 2fr;
-    grid-template-columns: 1fr 0.3fr 1fr;
+    grid-template-rows: 0.7fr 2fr;
+    grid-template-columns: 0.5fr 0.3fr 0.5fr;
 }
 
 .footer-section {
@@ -16,8 +16,8 @@
     align-items: center;
     justify-content: left;
     color: #d9d2d2;
-    padding-left: 170px;
-    font-size: 25px;
+    padding-left: 110px;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -25,10 +25,10 @@
     display: flex;
     text-align: justify;
     justify-content: left;
-    padding-left: 170px;
+    padding-left: 110px;
     padding-right: 20px;
     color: #868282;
-    font-size: 15px;
+    font-size: 13px;
     max-width: 70%;
     line-height: 20px;
 }
@@ -38,21 +38,25 @@
     align-items: center;
     justify-content: left;
     color: #d9d2d2;
-    padding-left: 70px;
-    font-size: 25px;
+    padding-left: 110px;
+    font-size: 20px;
     font-weight: bold;
 }
 
 .footer-content2 {
     display: flex;
-    text-align: left;
+    text-align: justify;
     justify-content: left;
-    padding-left: 90px;
-    padding-right: 10px;
+    padding-left: 130px;
+    padding-right: 20px;
     color: #868282;
-    font-size: 18px;
+    font-size: 15px;
     max-width: 70%;
-    line-height: 25px;
+    line-height: 20px;
+}
+
+.footer-content2 li {
+    margin-bottom: 10px;
 }
 
 .footer-section3 {
@@ -60,8 +64,8 @@
     align-items: center;
     justify-content: left;
     color: #d9d2d2;
-    padding-left: 200px;
-    font-size: 25px;
+    padding-left: 100px;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -70,11 +74,11 @@
     flex-direction: column;
     text-align: justify;
     justify-content: flex-start;
-    padding-left: 200px;
+    padding-left: 100px;
     padding-right: 20px;
     color: #868282;
-    font-size: 15px;
-    max-width: 50%;
+    font-size: 13px;
+    max-width: 58%;
     line-height: 20px;
 } 
 
@@ -91,7 +95,7 @@
 .footer-links2 {
     display: flex;
     flex-direction: row;
-    padding-top: 10px;
+    padding-top: 20px;
 }
 
 .footer-links2 a {

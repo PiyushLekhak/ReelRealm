@@ -3,8 +3,11 @@
 }
 
 .list__title {
-font-size: 1.75rem;
-margin:  2.5rem;
+    font-size: 1.5rem;
+    margin-top: 2.75rem;
+    margin-bottom: 1rem;
+    margin-left: 3.5rem;
+    color: #f4eba3;
 }
 
 .list__cards {
@@ -19,9 +22,9 @@ margin:  2.5rem;
 
 .remove-button {
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    background-color: black;
+    top: 1.5rem;
+    right: 1.5rem;
+    background-color: transparent;
     color: white;
     padding: 0.5rem;
     border: none;
@@ -40,7 +43,7 @@ margin:  2.5rem;
 }
 
 .remove-button svg {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     margin-right: 0;
 }
 
@@ -50,7 +53,7 @@ margin:  2.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 25.75rem);
+    height: calc(100vh - 24.75rem);
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 1.25rem;
 }
