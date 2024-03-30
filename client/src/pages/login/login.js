@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
-import { FaLock, FaUser, FaGoogle, FaFacebook } from "react-icons/fa";
+import { FaLock, FaUser, FaGoogle } from "react-icons/fa";
 import "./login.css";
 
 function Login() {
