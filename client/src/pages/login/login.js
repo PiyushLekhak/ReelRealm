@@ -70,11 +70,7 @@ function Login() {
             {" "}
             <FaGoogle className="social-media-icon" /> Sign in with Google{" "}
           </button>
-          {/* <br />
-          <button className="media-btn">
-            {" "}
-            <FaFacebook className="social-media-icon" /> Sign in with Facebook{" "}
-          </button> */}
+          <br />
         </div>
       </div>
     </div>
