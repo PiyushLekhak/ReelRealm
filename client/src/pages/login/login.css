@@ -2,7 +2,7 @@
   background-color: black;
   align-items: center;
   display: flex;
-  padding: 100px;
+  padding: 120px;
   flex-direction: column;
   min-height: 80vh;
   margin-top: -70px;
@@ -12,8 +12,8 @@
   background-color: rgba(5, 5, 5, 0.5);
   width: 30vw;
   justify-content: center;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   display: flex;
   border-radius: 20px;
   flex-direction: column;
@@ -69,27 +69,6 @@
   cursor: pointer;
   margin-left: 120px;
   margin-bottom: 20px;
-}
-
-.media-btn {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  background-color: white;
-  color: black;
-  border-radius: 50px;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 10px;
-  width: 175px;
-  cursor: pointer;
-  font-size: 13px;
-}
-
-.social-media-icon {
-  height: 20px;
-  width: 20px;
-  margin-right: 10px;
 }
 
 .register-link {

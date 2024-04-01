@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
-import { FaLock, FaUser, FaGoogle } from "react-icons/fa";
+import { FaLock, FaUser } from "react-icons/fa";
 import "./login.css";
 
 function Login() {
@@ -63,14 +63,6 @@ function Login() {
               Register Now
             </Link>
           </p>
-          <br/>
-          <h3>OR</h3>
-          <br />
-          <button className="media-btn">
-            {" "}
-            <FaGoogle className="social-media-icon" /> Sign in with Google{" "}
-          </button>
-          <br />
         </div>
       </div>
     </div>
