@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from . import recommender
+from . import recommender, analytics
 
 from rest_framework_simplejwt.views import (
     TokenRefreshView,

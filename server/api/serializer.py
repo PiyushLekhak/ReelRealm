@@ -1,4 +1,4 @@
-from api.models import User,Watchlist,Rating,UserInterest,Movie,Recommendation
+from api.models import User,Watchlist,Rating,UserInterest,Movie,Recommendation,UserAnalytics
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
@@ -17,7 +17,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['username'] = user.username
         token['email'] = user.email
         token['bio'] = user.profile.bio
-        token['image'] = str(user.profile.image)
         token['verified'] = user.profile.verified
         return token
 
@@ -74,3 +73,8 @@ class RecommendationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recommendation
         fields = ['user', 'movie_id']
+
+class UserAnalyticsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserAnalytics
+        fields = ['user', 'total_rated_movies', 'favorite_movie', 'total_movies_in_watchlist', 'top_5_genres']
