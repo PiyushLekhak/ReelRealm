@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from api.models import User,Watchlist,Rating,UserInterest,Recommendation
+from api.models import User,Watchlist,Rating,UserInterest,Recommendation, UserAnalytics
 
-from api.serializer import MyTokenObtainPairSerializer, RegisterSerializer, WatchlistSerializer, RatingSerializer, UserInterestSerializer,RecommendationSerializer
+from api.serializer import MyTokenObtainPairSerializer, RegisterSerializer, WatchlistSerializer, RatingSerializer, UserInterestSerializer,RecommendationSerializer, UserAnalyticsSerializer
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -210,5 +210,53 @@ def get_recommendations(request):
         recommendations = Recommendation.objects.filter(user=request.user)
         serializer = RecommendationSerializer(recommendations, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_total_rated_movies(request):
+    try:
+        user_analytics = UserAnalytics.objects.get(user=request.user)
+        data = {'total_rated_movies': user_analytics.total_rated_movies}
+        return Response(data, status=status.HTTP_200_OK)
+    except UserAnalytics.DoesNotExist:
+        return Response({'error': 'User analytics data not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_favorite_movie(request):
+    try:
+        user_analytics = UserAnalytics.objects.get(user=request.user)
+        data = {'favorite_movie': user_analytics.favorite_movie}
+        return Response(data, status=status.HTTP_200_OK)
+    except UserAnalytics.DoesNotExist:
+        return Response({'error': 'User analytics data not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_total_movies_in_watchlist(request):
+    try:
+        user_analytics = UserAnalytics.objects.get(user=request.user)
+        data = {'total_movies_in_watchlist': user_analytics.total_movies_in_watchlist}
+        return Response(data, status=status.HTTP_200_OK)
+    except UserAnalytics.DoesNotExist:
+        return Response({'error': 'User analytics data not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_top_5_genres(request):
+    try:
+        user_analytics = UserAnalytics.objects.get(user=request.user)
+        data = {'top_5_genres': user_analytics.top_5_genres}
+        return Response(data, status=status.HTTP_200_OK)
+    except UserAnalytics.DoesNotExist:
+        return Response({'error': 'User analytics data not found'}, status=status.HTTP_404_NOT_FOUND)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

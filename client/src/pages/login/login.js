@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
-import { FaLock, FaUser, FaGoogle, FaFacebook } from "react-icons/fa";
+import { FaLock, FaUser } from "react-icons/fa";
 import "./login.css";
 
 function Login() {
@@ -16,6 +16,10 @@ function Login() {
 
     console.log(email);
     console.log(password);
+  };
+
+  const handleForgotPassword = () => {
+    window.location.href = "http://127.0.0.1:8000/reset_password/";
   };
 
   return (
@@ -46,9 +50,9 @@ function Login() {
               />
             </div>
             <div className="forgot-password-container">
-              <Link to="/forgot-password" className="forgot-password-link">
+              <button onClick={handleForgotPassword} className="forgot-password-link">
                 Forgot Password?
-              </Link>
+              </button>
             </div>
             <button className="login-button"> Login </button>
           </form>
@@ -59,18 +63,6 @@ function Login() {
               Register Now
             </Link>
           </p>
-          <br/>
-          <h2>OR</h2>
-          <br />
-          <button className="media-btn">
-            {" "}
-            <FaGoogle className="social-media-icon" /> Sign in with Google{" "}
-          </button>
-          <br />
-          <button className="media-btn">
-            {" "}
-            <FaFacebook className="social-media-icon" /> Sign in with Facebook{" "}
-          </button>
         </div>
       </div>
     </div>

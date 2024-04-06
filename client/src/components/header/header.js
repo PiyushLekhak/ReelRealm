@@ -103,9 +103,9 @@ const Header = () => {
                         <div className="userDropdown" onClick={handleDropdown}>
                             <FaUser className="userIcon" />
                             {dropdownOpen && (
-                                <div className="dropdownMenu">                                    
+                                <div className="dropdownMenu">
+                                    <Link to="/profile" style={{textDecoration: "none"}}><span>My Analytics</span></Link>
                                     <Link to="/rated-movies" style={{textDecoration: "none"}}><span>Rated Movies</span></Link>
-                                    <Link to="/profile" style={{textDecoration: "none"}}><span>My Profile</span></Link>
                                     <Link onClick={logoutUser} style={{textDecoration: "none"}}><span>Log Out</span></Link>
                                 </div>
                             )

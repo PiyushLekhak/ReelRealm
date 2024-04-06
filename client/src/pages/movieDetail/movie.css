@@ -14,9 +14,9 @@
 
 .movie__backdrop {
     width: 100%;
-    height: 600px;
+    height: 480px;
     object-fit:cover;
-    object-position: 0 35%;
+    object-position: 0 45%;
 }
 
 .movie__detail {
@@ -24,7 +24,7 @@
     width: 75%;
     display: flex;
     position: relative;
-    bottom: 315px;
+    bottom: 255px;
 }
 
 .movie__detailLeft {
@@ -32,7 +32,7 @@
 }
 
 .movie__poster {
-    width:350px;
+    width:275px;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.86) 0px 22px 40px 6px;
 }
@@ -41,67 +41,63 @@
     color: white;
     display: flex;
     flex-direction: column;
-    height: 525px;
     justify-content:space-between ;
 }
 
 .movie__detailRightTop > div{
     text-shadow: 0px 0px 5px #000000;
     margin-bottom: 1rem;
+    position: relative;
+    top: -2.5rem; /* Adjusted to move the elements up */
 }
 
 .movie__name {
-    font-weight: 600;
-    font-size: 3rem;
+    font-weight: 750;
+    font-size: 2rem;
 }
 
 .movie__tagline {
-    font-size: 1.25rem;
-    font-weight: 500;
-    margin-bottom: 1rem;
+    font-size: 1rem;
     font-style: italic;
 }
 
 .movie__rating {
-    font-size: 2.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
+    font-size: 1.75rem;
+    font-weight: 500;
 }
 
 .movie__voteCount {
-    font-size: 1.5rem;
-    font-weight: 400;
-    margin-left: 1rem;
+    font-size: 1rem;
+    font-weight: 300;
+    margin-left: 0.5rem;
 }
 
 .movie__runtime {
-    font-size: 1.8rem;
+    font-size: 1.25rem;
     font-weight: 500;
-    margin-bottom: 1rem;
 }
 
 .movie__releaseDate {
     font-size: 1.25rem;
     font-weight: 500;
-    margin-bottom: 1rem;
 }
 
 .movie__genres {
-    margin-top: 2.5rem;
+    margin-top: 1.5rem;
 }
 
 .movie__genre {
-    padding: .5rem;
-    border: 2px solid white;
+    padding: .3rem;
+    border: 1.75px solid white;
     border-radius: 20px;
-    margin-right: 1rem;
+    margin-right: 0.75rem;
 }
 
 .playTrailerButton {
     background-color: transparent;
     border: none;
     color: white;
-    font-size: 1.8rem;
+    font-size: 1.45rem;
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -109,10 +105,6 @@
     position: absolute; /* Position the button absolutely */
     top: 120px; /* Align the button to the top of its containing element */
     right: 0; /* Align the button to the right of its containing element */
-}
-
-.playTrailerButton:hover {
-    text-decoration: underline;
 }
 
 .playTrailerButton svg {
@@ -123,18 +115,14 @@
     background-color: transparent;
     border: none;
     color: white;
-    font-size: 1.7rem;
+    font-size: 1.45rem;
     font-weight: 600;
     display: flex;
     align-items: center;
     cursor: pointer;
     position: absolute;
-    top: 350px; /* Adjust top offset as needed */
-    right: -42px; /* Adjust right offset as needed */
-}
-
-.addToWatchlistButton:hover {
-    text-decoration: underline;
+    top: 285px; /* Adjust top offset as needed */
+    right: -35px; /* Adjust right offset as needed */
 }
 
 .addToWatchlistButton svg {
@@ -145,22 +133,25 @@
     background-color: transparent;
     border: none;
     color: white;
-    font-size: 1.7rem;
+    font-size: 1.45rem;
     font-weight: 600;
     display: flex;
     align-items: center;
     cursor: pointer;
     position: absolute;
-    top: 450px; /* Adjust top offset as needed to position it below the "Add to Watchlist" button */
-    right: 25px;
-}
-
-.rateButton:hover {
-    text-decoration: underline;
+    top: 360px; /* Adjust top offset as needed to position it below the "Add to Watchlist" button */
+    right: 15px;
 }
 
 .rateButton svg {
     margin-right: 0.5rem;
+}
+
+.rateButton:hover,
+.addToWatchlistButton:hover,
+.playTrailerButton:hover {
+    text-decoration: underline;
+    color: #f4eba3;
 }
 
 .movie__detailRightBottom {
@@ -169,35 +160,17 @@
     text-align: justify;
 }
 
-.overviewText {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-}
-.overviewText > div:last-of-type {
-    margin-left: auto;
-}
-
 .movie__overview {
-    font-size: 1rem;
+    font-size: 0.9rem;
     line-height: 1.5;
 }
 
 .movie__streamingPlatforms {
     position: absolute;
-    top: 495px;
-    right: 20px;
+    top: 420px;
+    right: 0px;
     padding: 20px;
     color: white;
-}
-
-.streamingOnText {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-    margin-right: 35px;
 }
 
 .streamingPlatformsList {
@@ -206,24 +179,23 @@
 }
 
 .platform {
-    padding: .5rem;
-    border: 2px solid white;
+    padding: .3rem;
+    border: 1.75px solid white;
     border-radius: 20px;
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-    font-size: 1rem;
+    margin-right: 0.75rem;
 }
 
 .topCast {
     width: 80%;
     position: relative;
-    top: -200px;
+    top: -175px;
 }
 
 .topCastText {
-    font-size: 2.25rem;
+    font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 45px;
+    color: #f4eba3;
 }
 
 .topCastList {
@@ -235,13 +207,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: 120px;
-    margin-bottom: 70px;
+    margin-right: 90px;
+    margin-bottom: 90px;
 }
 
 .castAvatar {
-    width: 160px;
-    height: 160px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
     overflow: hidden;
     background-color: #f0f0f0;
@@ -257,7 +229,7 @@
 }
 
 .castName {
-    font-size: 1rem;
+    font-size: 0.9rem;
     margin-top: 15px;
     text-align: center;
 }

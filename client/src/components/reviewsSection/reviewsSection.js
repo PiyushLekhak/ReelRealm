@@ -46,7 +46,7 @@ const ReviewsSection = ({ movieId }) => {
                             <div className="review-header">
                                 <i className="fas fa-user"></i>
                                 <h3 className="reviewer-name">{review.author}</h3>
-                                <p className="review-time" style={{ marginTop: "5px" }}>{formatReviewTime(review.created_at)}</p>
+                                <p className="review-time" style={{ marginTop: "12px", fontSize: "10px" }}>{formatReviewTime(review.created_at)}</p>
                             </div>
                             <p>
                                 {review.showFullReview ? review.content : truncateReview(review.content)}

@@ -2,7 +2,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 from nltk.stem.porter import PorterStemmer
-from .models import Movie, UserInterest, Recommendation
+from .models import Movie, UserInterest, Recommendation, Rating
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 import re
@@ -46,7 +46,7 @@ def create_content_based_recommender():
 
         # Display the titles of the top 10 most similar movies
         similar_movies = []
-        for index in sorted_indices[1:21]:  # Exclude the first index (self-similarity)
+        for index in sorted_indices[1:26]:  # Exclude the first index (self-similarity)
             similar_movies.append(all_movies[int(index)].movie_title)
         return similar_movies
 
@@ -79,6 +79,10 @@ def generate_recommendations(sender, instance, created, **kwargs):
             movie = Movie.objects.filter(movie_title=title).first()
             if movie:
                 recommended_movies.append(movie.movie_id)
+        
+        # Exclude movies that the user has already rated
+        rated_movies = Rating.objects.filter(user=instance.user).values_list('movie_id', flat=True)
+        recommended_movies = [movie_id for movie_id in recommended_movies if movie_id not in rated_movies]
 
         # Delete existing recommendations for the user
         Recommendation.objects.filter(user=instance.user).delete()

@@ -10,7 +10,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 15.75rem);
+    height: calc(100vh - 16.2rem);
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 1.25rem;
 }

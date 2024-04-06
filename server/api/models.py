@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import AbstractUser
+from django.dispatch import receiver
 
 class User(AbstractUser):
     username = models.CharField(max_length=100)
@@ -16,7 +17,6 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=100)
     bio = models.CharField(max_length=100)
-    image = models.ImageField(upload_to="user_images", default="default.jpg")
     verified = models.BooleanField(default=False)
 
     def __str__(self):
@@ -38,7 +38,7 @@ class Rating(models.Model):
         unique_together = ('user', 'movie_id')  # Each user can rate a movie only once
 
     def __str__(self):
-        return f"Rating {self.rating} by {self.user.username} for {self.movie.movie_title}"
+        return f"Rating {self.rating} by {self.user.username} for {self.movie_id}"
     
 class Movie(models.Model):
     movie_id = models.IntegerField(unique=True)
@@ -71,3 +71,22 @@ def save_user_profile(sender, instance, **kwargs):
 
 post_save.connect(create_user_profile, sender=User)
 post_save.connect(save_user_profile, sender=User)
+
+class UserAnalytics(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    total_rated_movies = models.IntegerField(default=0)
+    favorite_movie = models.IntegerField(null=True, blank=True)
+    total_movies_in_watchlist = models.IntegerField(default=0)
+    top_5_genres = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return f"Analytics for {self.user.username}"
+
+@receiver(post_save, sender=User)
+def create_user_analytics(sender, instance, created, **kwargs):
+    if created:
+        UserAnalytics.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_analytics(sender, instance, **kwargs):
+    instance.useranalytics.save()

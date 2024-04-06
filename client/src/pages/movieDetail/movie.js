@@ -236,7 +236,7 @@ const Movie = () => {
                     icon: "warning",
                     toast: true,
                     timer: 2500,
-                    position: "top-right",
+                    position: "top",
                     timerProgressBar: true,
                     showConfirmButton: false,
                 });
@@ -259,7 +259,7 @@ const Movie = () => {
                         icon: "success",
                         toast: true,
                         timer: 2500,
-                        position: "top-right",
+                        position: "top",
                         timerProgressBar: true,
                         showConfirmButton: false,
                     });
@@ -287,7 +287,7 @@ const Movie = () => {
                         icon: "success",
                         toast: true,
                         timer: 2500,
-                        position: "top-right",
+                        position: "top",
                         timerProgressBar: true,
                         showConfirmButton: false,
                     });
@@ -304,16 +304,13 @@ const Movie = () => {
         <div className="movie">
             <div className="movie__intro">
                 <img className="movie__backdrop" src={`https://image.tmdb.org/t/p/original${currentMovieDetail ? currentMovieDetail.backdrop_path : ""}`} />
-                {streamingPlatforms.length > 0 && (
                     <div className="movie__streamingPlatforms">
-                        <div className="streamingOnText">Streaming On</div>
                         <div className="streamingPlatformsList">
                             {streamingPlatforms.map(platform => (
                                 <span className="platform" key={platform.provider_id}>{platform.provider_name}</span>
                             ))}
                         </div>
                     </div>
-                )}
             </div>
             <div className="movie__detail">
                 <div className="movie__detailLeft">
@@ -330,7 +327,7 @@ const Movie = () => {
                             <span className="movie__voteCount">{currentMovieDetail ? "(" + currentMovieDetail.vote_count + ") votes" : ""}</span>
                         </div>
                         <div className="movie__runtime">{currentMovieDetail ? `${Math.floor(currentMovieDetail.runtime / 60)} hr ${currentMovieDetail.runtime % 60} mins` : ""}</div>
-                        <div className="movie__releaseDate">{currentMovieDetail ? "Release date: " + currentMovieDetail.release_date : ""}</div>
+                        <div className="movie__releaseDate">{currentMovieDetail ? "" + currentMovieDetail.release_date : ""}</div>
                         <div className="movie__genres">
                             {currentMovieDetail && currentMovieDetail.genres && currentMovieDetail.genres.map(genre => (
                                 <span className="movie__genre" key={genre.id}>{genre.name}</span>
@@ -380,7 +377,6 @@ const Movie = () => {
                         </button>
                     </div>
                     <div className="movie__detailRightBottom">
-                        <div className="overviewText">Overview</div>
                         <div className="movie__overview">{currentMovieDetail ? currentMovieDetail.overview : ""}</div>
                     </div>
                 </div>
