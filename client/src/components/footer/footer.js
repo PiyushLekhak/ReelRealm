@@ -7,7 +7,7 @@ export default function Footer() {
     <div className="footer">
       <div className="footer-container">
         <div className="footer-section">ReelRealm</div>
-        <div className="footer-section2">Useful Links</div>
+        <div className="footer-section2">Quick Links</div>
         <div className="footer-section3">Contact Us</div>
         <div className="footer-content">
           <p>

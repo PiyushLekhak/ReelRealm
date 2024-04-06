@@ -48,10 +48,11 @@ def update_user_interest_data(sender, instance, **kwargs):
     sorted_genres = sorted(interest_count, key=interest_count.get, reverse=True)
     
     # Get the top genres with at least 1 count but not more than 5
-    top_interests = [genre for genre in sorted_genres if interest_count[genre] >= 1][:5]
+    top_interests = [{"genre": genre, "count": interest_count[genre]} for genre in sorted_genres if interest_count[genre] >= 1][:5]
     
     # Update top genres in UserAnalytics
     user_analytics, created = UserAnalytics.objects.get_or_create(user=user)
-    user_analytics.top_5_genres = ', '.join(top_interests)
+    top_interests_string = ', '.join(f"{genre['genre']} ({genre['count']})" for genre in top_interests)
+    user_analytics.top_5_genres = top_interests_string
     user_analytics.save()
 

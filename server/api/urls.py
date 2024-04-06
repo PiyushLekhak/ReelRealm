@@ -22,4 +22,8 @@ urlpatterns = [
     path('get_user_interest/', views.get_user_interest, name='get_user_interest'),
     path('delete_user_interest/', views.delete_user_interest, name='delete_user_interest'),
     path('get_recommendations/', views.get_recommendations, name='get_recommendations'),
+    path('get_total_rated_movies/', views.get_total_rated_movies, name='get_total_rated_movies'),
+    path('get_favorite_movie/', views.get_favorite_movie, name='get_favorite_movie'),
+    path('get_total_movies_in_watchlist/', views.get_total_movies_in_watchlist, name='get_total_movies_in_watchlist'),
+    path('get_top_5_genres/', views.get_top_5_genres, name='get_top_5_genres'),
 ]
