@@ -26,4 +26,5 @@ urlpatterns = [
     path('get_favorite_movie/', views.get_favorite_movie, name='get_favorite_movie'),
     path('get_total_movies_in_watchlist/', views.get_total_movies_in_watchlist, name='get_total_movies_in_watchlist'),
     path('get_top_5_genres/', views.get_top_5_genres, name='get_top_5_genres'),
+    path('update_profile/', views.update_profile, name='update_profile'),
 ]

@@ -2,8 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from api.models import User,Watchlist,Rating,UserInterest,Recommendation, UserAnalytics
 
-from api.serializer import MyTokenObtainPairSerializer, RegisterSerializer, WatchlistSerializer, RatingSerializer, UserInterestSerializer,RecommendationSerializer, UserAnalyticsSerializer
-
+from api.serializer import MyTokenObtainPairSerializer, RegisterSerializer, WatchlistSerializer, RatingSerializer, UserInterestSerializer,RecommendationSerializer, ProfileSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -258,5 +257,32 @@ def get_top_5_genres(request):
         return Response(data, status=status.HTTP_200_OK)
     except UserAnalytics.DoesNotExist:
         return Response({'error': 'User analytics data not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def update_profile(request):
+    try:
+        # Retrieve data from request
+        full_name = request.data.get('full_name')
+        bio = request.data.get('bio')
+
+        # Retrieve the profile instance associated with the current user
+        profile = request.user.profile
+
+        # Update the profile fields if data is provided
+        if full_name is not None:
+            profile.full_name = full_name
+        if bio is not None:
+            profile.bio = bio
+
+        # Save the updated profile
+        profile.save()
+
+        # Serialize the updated profile data
+        serializer = ProfileSerializer(profile)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

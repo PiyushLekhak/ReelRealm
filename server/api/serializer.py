@@ -1,4 +1,4 @@
-from api.models import User,Watchlist,Rating,UserInterest,Movie,Recommendation,UserAnalytics
+from api.models import User,Profile,Watchlist,Rating,UserInterest,Movie,Recommendation,UserAnalytics
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
@@ -20,6 +20,10 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['verified'] = user.profile.verified
         return token
 
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['full_name', 'bio']
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(

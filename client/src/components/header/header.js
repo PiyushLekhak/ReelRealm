@@ -4,8 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
-import { FaBookmark, FaSearch, FaUser } from 'react-icons/fa';
 import { useState, useRef, useEffect } from "react";
+import { FaBookmark, FaSearch, FaUser, FaStar } from 'react-icons/fa';
+import { MdTrendingUp, MdOutlineWatchLater, MdOutlineRecommend } from "react-icons/md";
+import { TbDeviceDesktopStar } from "react-icons/tb";
+import { CgLogIn, CgLogOut, CgProfile  } from "react-icons/cg";
+
 
 const Header = () => {
 
@@ -13,8 +17,8 @@ const Header = () => {
     const token = localStorage.getItem("authTokens")
 
     if (token){
-    const decoded = jwtDecode(token) 
-    var user_id = decoded.user_id
+        const decoded = jwtDecode(token) 
+        var username = decoded.username
     }
 
     const [searchQuery, setSearchQuery] = useState("");
@@ -89,24 +93,24 @@ const Header = () => {
                 )}
             </div>
             <div className="headerRight">             
-                <Link to = "/movies/popular" style = {{textDecoration: "none"}}><span>Popular</span></Link>
-                <Link to = "/movies/top_rated"style = {{textDecoration: "none"}}><span>Top Rated</span></Link>
-                <Link to = "/movies/upcoming"style = {{textDecoration: "none"}}><span>Upcoming</span></Link>
+                <Link to = "/movies/popular" style = {{textDecoration: "none"}}><span><MdTrendingUp style={{marginRight: "5px"}}/>Popular</span></Link>
+                <Link to = "/movies/top_rated"style = {{textDecoration: "none"}}><span><TbDeviceDesktopStar style={{marginRight: "5px"}}/>Top Rated</span></Link>
+                <Link to = "/movies/upcoming"style = {{textDecoration: "none"}}><span><MdOutlineWatchLater style={{marginRight: "5px"}}/>Upcoming</span></Link>
                 <Link to="/watchlist"style = {{textDecoration: "none"}}><span><FaBookmark style={{marginRight: "5px"}}/>Watchlist</span></Link>
                 {token === null && 
                 <>
-                <Link to="/login"style = {{textDecoration: "none"}}><span>Log In</span></Link>
+                <Link to="/login"style = {{textDecoration: "none"}}><span><CgLogIn style={{marginRight: "5px"}}/>Log In</span></Link>
                 </>}
                 {token !== null && 
                     <>
-                    <Link to="/recommendations" style={{textDecoration: "none"}}><span>Recommendations</span></Link>
+                    <Link to="/recommendations" style={{textDecoration: "none"}}><span><MdOutlineRecommend style={{marginRight: "5px"}}/>Recommendations</span></Link>
                         <div className="userDropdown" onClick={handleDropdown}>
                             <FaUser className="userIcon" />
                             {dropdownOpen && (
                                 <div className="dropdownMenu">
-                                    <Link to="/profile" style={{textDecoration: "none"}}><span>My Analytics</span></Link>
-                                    <Link to="/rated-movies" style={{textDecoration: "none"}}><span>Rated Movies</span></Link>
-                                    <Link onClick={logoutUser} style={{textDecoration: "none"}}><span>Log Out</span></Link>
+                                    <Link to="/profile" style={{textDecoration: "none"}}><span><CgProfile style={{marginRight: "5px"}}/>{username}</span></Link>
+                                    <Link to="/rated-movies" style={{textDecoration: "none"}}><span><FaStar style={{marginRight: "5px"}}/>Rated Movies</span></Link>
+                                    <Link onClick={logoutUser} style={{textDecoration: "none"}}><span><CgLogOut style={{marginRight: "5px"}}/>Log Out</span></Link>
                                 </div>
                             )
                         }

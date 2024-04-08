@@ -133,3 +133,99 @@
     font-weight: bold;
     text-transform: uppercase;
 }
+
+.user-info-card {
+    width: 50%; /* Adjust the width as needed */
+    margin: 20px auto 75px; /* Center horizontally with auto margin and add bottom margin */
+    border: 1px solid rgb(63, 62, 61);
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    background-color: #333232;
+    transition: transform 0.3s ease; /* Add transition property */
+    text-align: center;
+}
+
+.user-info-card:hover {
+    transform: scale(1.05); /* Scale up slightly on hover */
+}
+
+.user-info-card h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #ffffff;
+    padding-top: 1.25%;
+}
+
+.user-info-card p {
+    margin: 2%;
+    margin-left: 5%;
+    margin-bottom: 5px;
+    color: rgb(238, 236, 236);
+    font-size: 16px;
+    text-align: left;
+    padding-bottom: 1.5%;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.icon-wrapper {
+    color: rgb(0, 255, 153);
+    margin-right: 5px;
+    font-size: 25px;
+}
+
+.icon-wrapper2 {
+    color: rgb(0, 217, 255);
+    font-size: 25px;
+    margin-left: auto;
+}
+
+.icon-wrapper2 :hover {
+    cursor: pointer;
+}
+
+.input-wrapper {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper label {
+    margin: 20px;
+    margin-left: 45px;
+    font-weight: bold;
+    color: #9b9b9b;
+}
+
+.name-field {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #f4eba3;
+    border-radius: 5px;
+    resize: vertical;
+    background-color: #818181;
+}
+
+.bio-field {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #f4eba3;
+    border-radius: 5px;
+    margin-left: 50px;
+    resize: vertical;
+    background-color: #818181;
+}
+
+.name-field:focus,
+.bio-field:focus {
+    outline: none;
+    border-color: #ff6347;
+}
