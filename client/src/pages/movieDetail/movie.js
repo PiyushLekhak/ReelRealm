@@ -91,7 +91,7 @@ const Movie = () => {
                 icon: "warning",
                 toast: true,
                 timer: 2500,
-                position: "top-right",
+                position: "top",
                 timerProgressBar: true,
                 showConfirmButton: false,
             });

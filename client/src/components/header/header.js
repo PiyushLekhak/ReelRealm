@@ -105,7 +105,7 @@ const Header = () => {
                     <>
                     <Link to="/recommendations" style={{textDecoration: "none"}}><span><MdOutlineRecommend style={{marginRight: "5px"}}/>Recommendations</span></Link>
                         <div className="userDropdown" onClick={handleDropdown}>
-                            <FaUser className="userIcon" />
+                            <FaUser style={{color: "#fa5437"}} className="userIcon" />
                             {dropdownOpen && (
                                 <div className="dropdownMenu">
                                     <Link to="/profile" style={{textDecoration: "none"}}><span><CgProfile style={{marginRight: "5px"}}/>{username}</span></Link>

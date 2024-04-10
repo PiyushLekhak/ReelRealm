@@ -1,6 +1,6 @@
 .profile-section {
     max-width: 80%;
-    margin: 0 auto; /* Center the content horizontally */
+    margin: 0 auto /* Center the content horizontally */
 }
 
 .card-wrapper {
@@ -26,10 +26,15 @@
     margin-top: 3%;
 }
 
+.sub-profile {
+    margin: 0 auto; /* Center the content horizontally */
+    display: flex; /* Set display to flex */
+    margin-bottom: 10%;
+}
+
 .left-header,
 .right-header {
-    margin-bottom: 30px;
-    margin-top: -40px;
+    margin-bottom: 20px;
 }
 
 .left-header-container,
@@ -39,14 +44,15 @@
     align-items: center;
     justify-content: flex-start;
     height: 100%;
+    margin-top: 1.75%;
 }
 
 .left-header-container {
-    margin-right: 100px;
+    margin-left: 20px;
 }
 
 .right-header-container {
-    margin-left: 120px;
+    margin-left: 100px;
 }
 
 .left-card::before,
@@ -54,7 +60,7 @@
     content: '\f005';
     font-family: 'Font Awesome 5 Free';
     font-weight: 500;
-    font-size: 170px;
+    font-size: 120px;
     color: rgba(255, 217, 0, 1);
     position: absolute;
     top: 50%;
@@ -66,18 +72,15 @@
 
 .right-card::before {
     content: '\f02e';
-    font-size: 180px;
+    font-size: 120px;
     color: rgba(26, 151, 234, 1);
 }
 
 .left-card,
 .right-card {
     width: 200px;
-    height: 320px;
-    border: none;
+    height: 150px;
     margin: 0 20px;
-    border-radius: 10px;
-    box-shadow: 0 8px 8px rgba(250, 84, 55, 0.7), 0 1px 3px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform .2s;
     color: #fff;
@@ -90,7 +93,6 @@
 .left-card:hover,
 .right-card:hover {
     transform: scale(1.25);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.12);
     cursor: pointer;
 }
 
@@ -105,20 +107,16 @@
     text-align: center;
 }
 
-.bar-chart-container {
-    display: flex;
-    align-items: flex-start; /* Align items to the top */
-    margin-top: 90px; /* Add some margin for spacing */
-    width: 80%;
-    padding-left: 10%;
-    padding-bottom: 90px;
-}
-
 .tag-cloud-container {
-    margin-top: 30px;
+    margin-top: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.tag-cloud {
+    margin-top: -65px;
+    margin-bottom: 25px;
 }
 
 .tag-cloud-item {
@@ -135,39 +133,38 @@
 }
 
 .user-info-card {
-    width: 50%; /* Adjust the width as needed */
-    margin: 20px auto 75px; /* Center horizontally with auto margin and add bottom margin */
+    width: 30%; /* Adjust the width as needed */
+    margin: 20px 75px; /* Center horizontally with auto margin and add bottom margin */
     border: 1px solid rgb(63, 62, 61);
     border-radius: 5px;
     padding: 10px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    background-color: #333232;
+    background-color: #151515;
     transition: transform 0.3s ease; /* Add transition property */
     text-align: center;
 }
 
 .user-info-card:hover {
-    transform: scale(1.05); /* Scale up slightly on hover */
+    transform: scale(1.10); /* Scale up slightly on hover */
 }
 
 .user-info-card h2 {
-    font-size: 1.5rem;
+    font-size: 1.15rem;
     font-weight: 600;
     margin-bottom: 15px;
     color: #ffffff;
     padding-top: 1.25%;
+    margin-top: 10px;
 }
 
 .user-info-card p {
-    margin: 2%;
+    margin: 1%;
     margin-left: 5%;
-    margin-bottom: 5px;
     color: rgb(238, 236, 236);
     font-size: 16px;
     text-align: left;
-    padding-bottom: 1.5%;
 }
 
 .user-info {
@@ -179,12 +176,12 @@
 .icon-wrapper {
     color: rgb(0, 255, 153);
     margin-right: 5px;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .icon-wrapper2 {
     color: rgb(0, 217, 255);
-    font-size: 25px;
+    font-size: 20px;
     margin-left: auto;
 }
 
@@ -200,7 +197,7 @@
 
 .input-wrapper label {
     margin: 20px;
-    margin-left: 45px;
+    margin-left: 1px;
     font-weight: bold;
     color: #9b9b9b;
 }

@@ -245,65 +245,65 @@ function Profile() {
 
     return (
         <div className='profile-section'>
-            <div className="user-info-card">
-                <div className="user-info">
-                    <div className="icon-wrapper">
-                        <AiOutlineProfile />
-                    </div>
-                    <h2>My Details</h2>
-                    {!isEditing && (
-                        <div className="icon-wrapper2" onClick={handleEditClick}>
-                            <FaEdit />
+            <div className="sub-profile">
+                <div className="user-info-card">
+                    <div className="user-info">
+                        <div className="icon-wrapper">
+                            <AiOutlineProfile />
                         </div>
+                        <h2>User Details</h2>
+                        {!isEditing && (
+                            <div className="icon-wrapper2" onClick={handleEditClick}>
+                                <FaEdit />
+                            </div>
+                        )}
+                        {isEditing && (
+                            <div className="icon-wrapper2" onClick={handleSaveClick}>
+                                <FaSave />
+                            </div>
+                        )}
+                    </div>
+                    {!isEditing && (
+                        <>
+                            <p><strong style={{ fontSize: '17px', color: '#9b9b9b' }}>Username:</strong> {username}</p>
+                            <p><strong style={{ fontSize: '17px', color: '#9b9b9b' }}>Full Name:</strong> {fullName}</p>
+                            <p><strong style={{ fontSize: '17px', color: '#9b9b9b' }}>Email:</strong> {email}</p>
+                            <p><strong style={{ fontSize: '17px', color: '#9b9b9b' }}>Bio:</strong> {bio}</p>
+                            <p><strong style={{ fontSize: '17px', color: '#9b9b9b' }}>Verification Status:</strong> 
+                                {verificationStatus ? 
+                                <MdVerified style={{ color: 'green', verticalAlign: 'top', fontSize: '20px', marginLeft: '5px' }} /> : 
+                                <IoMdCloseCircle style={{ color: 'red', verticalAlign: 'top', fontSize: '20px', marginLeft: '5px' }} />}
+                            </p>
+                        </>
                     )}
                     {isEditing && (
-                        <div className="icon-wrapper2" onClick={handleSaveClick}>
-                            <FaSave />
-                        </div>
-                    )}
-                </div>
-                {!isEditing && (
                     <>
-                        <p><strong style={{ fontSize: '18px', color: '#9b9b9b' }}>Username:</strong> {username}</p>
-                        <p><strong style={{ fontSize: '18px', color: '#9b9b9b' }}>Full Name:</strong> {fullName}</p>
-                        <p><strong style={{ fontSize: '18px', color: '#9b9b9b' }}>Email:</strong> {email}</p>
-                        <p><strong style={{ fontSize: '18px', color: '#9b9b9b' }}>Bio:</strong> {bio}</p>
-                        <p><strong style={{ fontSize: '18px', color: '#9b9b9b' }}>Verification Status:</strong> 
-                            {verificationStatus ? 
-                            <MdVerified style={{ color: 'green', verticalAlign: 'middle', fontSize: '24px', marginLeft: '10px' }} /> : 
-                            <IoMdCloseCircle style={{ color: 'red', verticalAlign: 'middle', fontSize: '24px', marginLeft: '10px' }} />}
-                        </p>
+                        <div className="input-wrapper">
+                            <label htmlFor="fullName">Full Name:</label>
+                            <input
+                                type="text"
+                                id="fullName"
+                                value={fullName}
+                                onChange={(e) => setFullName(e.target.value)}
+                                className="name-field"
+                            />
+                        </div>
+                        <div className="input-wrapper">
+                            <label htmlFor="bio">Bio:</label>
+                            <textarea
+                                id="bio"
+                                value={bio}
+                                onChange={(e) => setBio(e.target.value)}
+                                className="bio-field"
+                            />
+                        </div>
                     </>
                 )}
-                {isEditing && (
-                <>
-                    <div className="input-wrapper">
-                        <label htmlFor="fullName">Full Name:</label>
-                        <input
-                            type="text"
-                            id="fullName"
-                            value={fullName}
-                            onChange={(e) => setFullName(e.target.value)}
-                            className="name-field"
-                        />
-                    </div>
-                    <div className="input-wrapper">
-                        <label htmlFor="bio">Bio:</label>
-                        <textarea
-                            id="bio"
-                            value={bio}
-                            onChange={(e) => setBio(e.target.value)}
-                            className="bio-field"
-                        />
-                    </div>
-                </>
-            )}
-            </div>
-            <div className="profile-container">
+                </div>
                 <div className="left-header-container">
                     <Link to="/rated-movies" style={{ textDecoration: 'none', color: 'inherit' }}>
                     <div className="left-header">
-                        <h2><i className="fas fa-star" style={{ color: 'gold' }}></i> Total Rated Movies</h2>
+                        <h2 style={{ fontSize: '1.35rem' }}><i className="fas fa-star" style={{ color: 'gold' }}></i> Total Rated Movies</h2>
                     </div>
                     <div className="left-card">
                         <div className="card-content">
@@ -312,6 +312,20 @@ function Profile() {
                     </div>
                     </Link>
                 </div>
+                <div className="right-header-container">
+                    <Link to="/watchlist" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <div className="right-header">
+                            <h2 style={{ fontSize: '1.35rem' }}><i className="fas fa-bookmark" style={{ color: '#3498db' }}></i> Movies in Watchlist</h2>
+                        </div>
+                        <div className="right-card">
+                            <div className="card-content">
+                                <p style={{ fontSize: '24px', fontWeight: 'bold', textAlign: 'center' }}>{totalMoviesInWatchlist}</p>
+                            </div>
+                        </div>
+                    </Link>
+                </div>
+            </div>
+            <div className="profile-container">
                 <div className="card-wrapper">
                     <h2 style={{ marginLeft: '30px' }}><i className="fas fa-heart" style={{ color: 'red' }}></i> Favorite Movie</h2>
                     <div className="card-content">
@@ -322,23 +336,9 @@ function Profile() {
                         )}
                     </div>
                 </div>
-                <div className="right-header-container">
-                    <Link to="/watchlist" style={{ textDecoration: 'none', color: 'inherit' }}>
-                        <div className="right-header">
-                            <h2><i className="fas fa-bookmark" style={{ color: '#3498db' }}></i> Movies in Watchlist</h2>
-                        </div>
-                        <div className="right-card">
-                            <div className="card-content">
-                                <p style={{ fontSize: '24px', fontWeight: 'bold', textAlign: 'center' }}>{totalMoviesInWatchlist}</p>
-                            </div>
-                        </div>
-                    </Link>
-                </div>
-                </div>
-                {/* Bar chart */}
-                <div className="bar-chart-container">                
-                    <ResponsiveContainer height={450}>
-                        <h2 style={{ display: "flex", alignItems: "center", marginLeft: '350px', marginBottom: '20px' }}>
+                {/* Bar Chart */}
+                <ResponsiveContainer width="70%" height={400}>
+                        <h2 style={{ display: "flex", alignItems: "center", marginLeft: '290px', marginBottom: '20px', marginTop: '-10px' }}>
                             <IoStatsChartSharp style={{ marginRight: "10px", color: "rgba(250, 84, 55, 1)" }} />
                             My Top 5 Genres
                         </h2>
@@ -355,23 +355,21 @@ function Profile() {
                                 formatter={(value, name) => [value, "Count"]}
                                 labelStyle={{ color: '#f4eba3' }}
                             />
-                            <Bar dataKey="value" fill="rgba(250, 84, 55, 1)" barSize={50} activeBar={<Rectangle fill="#f4eba3" />} />
-                        </BarChart>
-                    </ResponsiveContainer>
-                </div>
-                        {/* Tag Cloud Container */}
-                <div className="tag-cloud-container">
-                    <h2>
-                    <i class="fas fa-cloud" style={{ marginRight: "10px", color: "rgba(244, 235, 163, 1)" }}></i>
-                        Most commonly occuring words in watched movies
-                    </h2>
-                    <div className="tag-cloud-container">
-                    {topWords.length > 0 ? (
-                        <div className="tag-cloud" ref={tagCloudRef}></div>
-                    ) : (
-                        <p className="empty-favorites">No movies rated yet.</p>
-                    )}
-                </div>
+                        <Bar dataKey="value" fill="rgba(250, 84, 55, 1)" barSize={50} activeBar={<Rectangle fill="#f4eba3" />} />
+                    </BarChart>
+                </ResponsiveContainer>
+            </div>
+            {/* Tag Cloud */}
+            <div className="tag-cloud-container">
+                <h2>
+                <i class="fas fa-cloud" style={{ marginRight: "10px", color: "rgba(244, 235, 163, 1)" }}></i>
+                    Most commonly occuring words in watched movies
+                </h2>
+                {topWords.length > 0 ? (
+                <div className="tag-cloud" ref={tagCloudRef}></div>
+                ) : (
+                <p className="empty-favorites">No movies rated yet.</p>
+                )}
             </div>
         </div>
     );
