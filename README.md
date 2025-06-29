@@ -12,6 +12,7 @@ A full-stack, content-based movie recommendation system built using **Django** (
 - 🖼️ Movie posters, summaries, and other visuals fetched from TMDB API
 - 🔄 Automatic recommendation generation using Django Signals
 - 🧾 User ratings and interest logging
+- 🧠 **Personalized Recommendations** that evolve as the user adds more interests or rates more movies
 - ⚛️ React-powered responsive UI
 
 ---
